@@ -42,7 +42,7 @@ function main() {
       fi
     }
 
-    export PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset}\$(_exitstatus) > "
+    export PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset}\$(_exitstatus) ‣ "
   }
 
   function setup_colors() {
