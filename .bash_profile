@@ -18,6 +18,31 @@ function main() {
     export PATH="${GOPATH}/bin:${PATH}"
 
     export EDITOR="nvim"
+
+    local reset="\e[0m"
+    local lightblue="\e[94m"
+    local lightgreen="\e[92m"
+    local lightred="\e[91m"
+
+    function _exitstatus() {
+      local status
+      status="${?}"
+
+      if [[ "${status}" != "0" ]]; then
+        printf "%s" " ☠️  [${status}]"
+      fi
+    }
+
+    function _bgjobs() {
+      local count
+      count="$(jobs | wc -l | tr -d ' ')"
+
+      if [[ "${count}" != "0" ]]; then
+        printf "%s" "${count} jobs "
+      fi
+    }
+
+    export PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset}\$(_exitstatus) > "
   }
 
   function setup_colors() {
