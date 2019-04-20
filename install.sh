@@ -1,6 +1,8 @@
 #!/bin/bash -exu
 
 readonly PROGDIR="$(cd "$(dirname "${0}")" && pwd)"
+readonly WORKSPACE="${HOME}/workspace"
+readonly GOPATH="${HOME}/go"
 
 function main() {
 	if [[ ! -d "/Library/Developer/CommandLineTools" ]]; then
@@ -17,7 +19,7 @@ function main() {
 
 	ln -sf "${PROGDIR}/.bash_profile" "${HOME}/.bash_profile"
 	ln -sf "${PROGDIR}/.gitconfig" "${HOME}/.gitconfig"
-	mkdir -pv "${HOME}/workspace"
+	mkdir -pv "${WORKSPACE}"
 
 	cp -f "${PROGDIR}/spectacle.json" "${HOME}/Library/Application Support/Spectacle/Shortcuts.json"
 
@@ -34,8 +36,8 @@ function main() {
 	nvim -c "PlugUpdate" -c "qall" --headless
 	nvim -c "GoInstallBinaries" -c "qall!" --headless /tmp/foo.go
 
-	GOPATH="${HOME}/workspace" go get -u github.com/onsi/ginkgo/ginkgo
-	GOPATH="${HOME}/workspace" go get -u github.com/onsi/gomega
+	go get -u github.com/onsi/ginkgo/ginkgo
+	go get -u github.com/onsi/gomega
 
 	echo "Success!"
 }

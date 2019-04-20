@@ -12,7 +12,7 @@ function main() {
     export LSCOLORS exfxcxdxbxegedabagacad
 
     # go environment
-    export GOPATH="${HOME}/workspace"
+    export GOPATH="${HOME}/go"
 
     # setup path
     export PATH="${GOPATH}/bin:${PATH}"
@@ -84,7 +84,7 @@ function reload() {
 
 function reinstall() {
   local workspace
-  workspace="${HOME}/workspace/src/github.com/ryanmoran/workspace"
+  workspace="${HOME}/workspace/workspace"
 
   if [[ ! -d "${workspace}" ]]; then
     git clone git@github.com:ryanmoran/workspace "${workspace}"
