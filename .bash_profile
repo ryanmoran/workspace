@@ -42,7 +42,16 @@ function main() {
       fi
     }
 
-    export PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset}\$(_exitstatus) ‣ "
+    function _gitstatus() {
+      local branch status
+      branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
+
+      if [[ "${branch}" != "" ]]; then
+        printf "[%s] %s" "${branch}" "${status}"
+      fi
+    }
+
+    export PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset}\$(_exitstatus) \$(_gitstatus) \n ‣ "
   }
 
   function setup_colors() {
