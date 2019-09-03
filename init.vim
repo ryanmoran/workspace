@@ -28,6 +28,10 @@ nnoremap <leader>y "*y
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" Maintain undo history between sessions
+set undofile
+set undodir=~/.config/nvim/undodir
+
 " Setting Spacing and Indent (plus line no)
 set nu
 set tabstop=2 shiftwidth=2 expandtab
@@ -77,7 +81,7 @@ function! InsertTabWrapper()
     if !col || getline('.')[col - 1] !~ '\k'
         return "\<tab>"
     else
-        return "\<c-p>"
+        return "\<c-x>\<tab>"
     endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
