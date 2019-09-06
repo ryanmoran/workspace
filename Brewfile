@@ -1,4 +1,5 @@
 tap 'homebrew/cask'
+tap 'ryanmoran/tools'
 
 brew 'bash-completion'
 brew 'git'
@@ -7,6 +8,7 @@ brew 'graphviz'
 brew 'jq'
 brew 'neovim'
 brew 'python3'
+brew 'ryanmoran/tools/faux'
 brew 'shellcheck'
 brew 'sqlite'
 brew 'the_silver_searcher'
