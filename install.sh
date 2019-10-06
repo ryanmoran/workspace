@@ -19,8 +19,10 @@ function main() {
 
 	ln -sf "${PROGDIR}/.bash_profile" "${HOME}/.bash_profile"
 	ln -sf "${PROGDIR}/.gitconfig" "${HOME}/.gitconfig"
+	ln -sf "${PROGDIR}/.inputrc" "${HOME}/.inputrc"
 	mkdir -pv "${WORKSPACE}"
 
+	mkdir -p "${HOME}/Library/Application Support/Spectacle"
 	cp -f "${PROGDIR}/spectacle.json" "${HOME}/Library/Application Support/Spectacle/Shortcuts.json"
 
 	if [[ ! -d "${HOME}/.config/colorschemes" ]]; then
@@ -32,9 +34,8 @@ function main() {
 	curl -fLo "${HOME}/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	mkdir -p "${HOME}/.config/nvim"
 	ln -sf "${PROGDIR}/init.vim" "${HOME}/.config/nvim/init.vim"
-	nvim -c "PlugInstall" -c "qall" --headless
-	nvim -c "PlugUpdate" -c "qall" --headless
-	nvim -c "GoInstallBinaries" -c "qall!" --headless /tmp/foo.go
+	nvim -c "PlugInstall" -c "PlugUpdate" -c "qall" --headless
+	nvim -c "GoInstallBinaries" -c "GoUpdateBinaries" -c "qall!" --headless /tmp/foo.go
 
 	go get -u github.com/onsi/ginkgo/ginkgo
 	go get -u github.com/onsi/gomega

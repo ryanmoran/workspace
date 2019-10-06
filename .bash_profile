@@ -11,6 +11,8 @@ function main() {
     export CLICOLOR=1
     export LSCOLORS exfxcxdxbxegedabagacad
 
+    export LC_ALL=en_US.UTF-8
+
     # go environment
     export GOPATH="${HOME}/go"
 
@@ -19,44 +21,55 @@ function main() {
 
     export EDITOR="nvim"
 
-    local reset="\e[0m"
-    local lightblue="\e[94m"
-    local lightgreen="\e[92m"
-    local lightred="\e[91m"
-
-    function _exitstatus() {
-      local status
-      status="${?}"
-
-      if [[ "${status}" != "0" ]]; then
-        printf "%s" " ☠️  [${status}]"
-      fi
-    }
-
     function _bgjobs() {
       local count
       count="$(jobs | wc -l | tr -d ' ')"
 
-      if [[ "${count}" != "0" ]]; then
+      if [[ "${count}" == "1" ]]; then
+        printf "%s" "${count} job "
+      elif [[ "${count}" != "0" ]]; then
         printf "%s" "${count} jobs "
       fi
     }
 
     function _gitstatus() {
       local branch status
-      branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
+      branch="$(git branch 2>/dev/null | grep '^\*' | colrm 1 2)"
 
       if [[ "${branch}" != "" ]]; then
         printf "[%s] %s" "${branch}" "${status}"
       fi
     }
 
-    export PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset}\$(_exitstatus) \$(_gitstatus) \n ‣ "
+    function _prompt() {
+      local status="${?}"
+
+      local reset lightblue lightgreen lightred
+      reset="\e[0m"
+      lightblue="\e[94m"
+      lightgreen="\e[92m"
+      lightred="\e[91m"
+
+      if [[ "${status}" != "0" ]]; then
+        status="$(printf "%s" " ☠️  ${lightred}{${status}}${reset}")"
+      else
+        status=""
+      fi
+
+
+      PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset}${status} \$(_gitstatus) \n ‣ "
+    }
+
+    if [[ "${PROMPT_COMMAND}" != *"_prompt"* ]]; then
+      PROMPT_COMMAND="_prompt;$PROMPT_COMMAND"
+    fi
   }
 
   function setup_colors() {
     local colorscheme
     colorscheme="${HOME}/.config/colorschemes/scripts/base16-tomorrow-night.sh"
+
+    # shellcheck source=/Users/ryanmoran/.config/colorschemes/scripts/base16-tomorrow-night.sh
     [[ -s "${colorscheme}" ]] && source "${colorscheme}"
   }
 
@@ -72,13 +85,14 @@ function main() {
         completions
       )
 
-  for dependency in ${dependencies[@]}; do
+  for dependency in "${dependencies[@]}"; do
     eval "setup_${dependency}"
     unset -f "setup_${dependency}"
   done
 }
 
 function reload() {
+  # shellcheck source=/Users/ryanmoran/.bash_profile
   source "${HOME}/.bash_profile"
 }
 
@@ -90,16 +104,15 @@ function reinstall() {
     git clone git@github.com:ryanmoran/workspace "${workspace}"
   fi
 
-  pushd "${workspace}" > /dev/null
-    git diff --exit-code > /dev/null
-    if [[ "${?}" == "0" ]]; then
+  pushd "${workspace}" > /dev/null || return
+    if git diff --exit-code > /dev/null ; then
       git pull -r
       bash -c "./install.sh"
     else
       echo "Cannot reinstall. There are unstaged changes."
       git diff
     fi
-  popd > /dev/null
+  popd > /dev/null || return
 }
 
 main
