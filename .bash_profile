@@ -33,11 +33,31 @@ function main() {
     }
 
     function _gitstatus() {
-      local branch status
+      local branch
       branch="$(git branch 2>/dev/null | grep '^\*' | colrm 1 2)"
 
       if [[ "${branch}" != "" ]]; then
-        printf "[%s] %s" "${branch}" "${status}"
+        local raw status val
+        raw="$(git status --short 2>&1)"
+
+        for t in M A D R C U ?; do
+          val="$(echo "${raw}" | grep -c "^${t}\|^.${t}")"
+
+          if [[ "${val}" != 0 ]]; then
+            status="${status} ${val}${t}"
+          fi
+        done
+
+        if [[ "${status}" != "" ]]; then
+          local lightyellow reset
+          lightyellow="\e[93m"
+          reset="\e[0m"
+          status=":${lightyellow}${status}${reset}"
+        fi
+
+        status="${branch}${status}"
+
+        printf "[%s]" "${status}"
       fi
     }
 
@@ -56,8 +76,10 @@ function main() {
         status=""
       fi
 
+      local gitstatus
+      gitstatus="$(_gitstatus)"
 
-      PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset}${status} \$(_gitstatus) \n ‣ "
+      PS1="${lightblue}\\d${reset} \\t ${lightred}\$(_bgjobs)${reset}${lightgreen}\\w${reset} ${gitstatus}${status}\n ‣ "
     }
 
     if [[ "${PROMPT_COMMAND}" != *"_prompt"* ]]; then
