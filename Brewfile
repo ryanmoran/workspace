@@ -1,11 +1,13 @@
 tap 'homebrew/cask'
 tap 'ryanmoran/tools'
+tap 'nektos/tap'
 
 brew 'bash-completion'
 brew 'git'
 brew 'go'
 brew 'graphviz'
 brew 'jq'
+brew 'nektos/tap/act'
 brew 'neovim'
 brew 'nodejs'
 brew 'python3'
