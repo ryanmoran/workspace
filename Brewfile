@@ -6,6 +6,7 @@ tap 'ryanmoran/tools'
 
 brew 'bash-completion'
 brew 'buildpacks/tap/pack'
+brew 'dive'
 brew 'gh'
 brew 'git'
 brew 'go'
