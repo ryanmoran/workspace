@@ -76,6 +76,12 @@ let g:ale_linters = {
 \   'go': ['golangci-lint'],
 \   'javascript': ['eslint', 'flow-language-server'],
 \}
+let g:ale_go_golangci_lint_options = '--enable bodyclose --enable golint --enable gosec --enable unparam --enable scopelint --enable godox --enable testpackage'
+
+" Fixing
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
 
 " Unbreak YAML indents
 autocmd FileType yaml setlocal indentexpr=
