@@ -1,16 +1,16 @@
 " Plug for plugins
 call plug#begin('~/.vim/plugged')
 
-Plug 'flazz/vim-colorschemes' " All the colorschemes
-Plug 'tpope/vim-fugitive'     " Git Commands
-Plug 'fatih/vim-go'           " Lets do go development
-Plug 'benekastah/neomake'     " Nevoim specific plugins
-Plug 'tpope/vim-unimpaired'   " Pairs of handy bracket mappings
-Plug 'tpope/vim-commentary'   " Make commenting easier
-Plug 'tpope/vim-vinegar'      " Make netrw way better
-Plug 'mileszs/ack.vim'        " search
-Plug 'ctrlpvim/ctrlp.vim'     " Fuzzy finder
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete
+Plug 'flazz/vim-colorschemes'  " All the colorschemes
+Plug 'tpope/vim-fugitive'      " Git Commands
+Plug 'fatih/vim-go'            " Lets do go development
+Plug 'pangloss/vim-javascript' " Lets do go development
+Plug 'tpope/vim-unimpaired'    " Pairs of handy bracket mappings
+Plug 'tpope/vim-commentary'    " Make commenting easier
+Plug 'tpope/vim-vinegar'       " Make netrw way better
+Plug 'mileszs/ack.vim'         " search
+Plug 'dense-analysis/ale'      " Linting
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
 
 call plug#end()
 
@@ -71,29 +71,21 @@ au FileType go nmap <Leader>a <Plug>(go-alternate-vertical)
 " Open godoc in a vertical split
 au FileType go nmap <Leader>d <Plug>(go-doc-vertical)
 
+" Linting
+let g:ale_linters = {
+\   'go': ['golangci-lint'],
+\   'javascript': ['eslint', 'flow-language-server'],
+\}
+
 " Unbreak YAML indents
 autocmd FileType yaml setlocal indentexpr=
-
-" Run neomake on buffer write
-call neomake#configure#automake('w')
-autocmd! BufWritePost * Neomake " Run neomake, it's like syntastic
-
-" MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
-"function! InsertTabWrapper()
-"    let col = col('.') - 1
-"    if !col || getline('.')[col - 1] !~ '\k'
-"        return "\<tab>"
-"    else
-"        return "\<c-p>"
-"    endif
-"endfunction
-"inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-"inoremap <s-tab> <c-n>
 
 " Enable autocompletion
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('auto_complete', v:false)
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
 inoremap <silent><expr> <TAB>
 		\ pumvisible() ? "\<C-n>" :
 		\ <SID>check_back_space() ? "\<TAB>" :
