@@ -73,7 +73,7 @@ au FileType go nmap <Leader>d <Plug>(go-doc-vertical)
 
 " Linting
 let g:ale_linters = {
-\   'go': ['golangci-lint'],
+\   'go': ['go build', 'golangci-lint'],
 \   'javascript': ['eslint', 'flow-language-server'],
 \}
 let g:ale_go_golangci_lint_options = '--enable bodyclose --enable golint --enable gosec --enable unparam --enable scopelint --enable godox --enable testpackage --disable unused'
