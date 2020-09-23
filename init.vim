@@ -76,7 +76,7 @@ let g:ale_linters = {
 \   'go': ['golangci-lint'],
 \   'javascript': ['eslint', 'flow-language-server'],
 \}
-let g:ale_go_golangci_lint_options = '--enable bodyclose --enable golint --enable gosec --enable unparam --enable scopelint --enable godox --enable testpackage'
+let g:ale_go_golangci_lint_options = '--enable bodyclose --enable golint --enable gosec --enable unparam --enable scopelint --enable godox --enable testpackage --disable unused'
 
 " Fixing
 let g:ale_fixers = {
