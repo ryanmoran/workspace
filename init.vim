@@ -11,6 +11,9 @@ Plug 'tpope/vim-vinegar'       " Make netrw way better
 Plug 'mileszs/ack.vim'         " search
 Plug 'dense-analysis/ale'      " Linting
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
+Plug 'cespare/vim-toml'
+Plug 'airblade/vim-gitgutter'
+
 
 call plug#end()
 
