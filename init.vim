@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'flazz/vim-colorschemes'  " All the colorschemes
 Plug 'tpope/vim-fugitive'      " Git Commands
 Plug 'fatih/vim-go'            " Lets do go development
-Plug 'pangloss/vim-javascript' " Lets do go development
+Plug 'pangloss/vim-javascript' " Lets do javascript development
 Plug 'tpope/vim-unimpaired'    " Pairs of handy bracket mappings
 Plug 'tpope/vim-commentary'    " Make commenting easier
 Plug 'tpope/vim-vinegar'       " Make netrw way better

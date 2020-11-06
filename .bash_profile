@@ -21,6 +21,8 @@ function main() {
 
     export EDITOR="nvim"
 
+    export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/bin/python3"
+
     function _bgjobs() {
       local count
       count="$(jobs | wc -l | tr -d ' ')"
