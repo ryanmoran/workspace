@@ -17,7 +17,7 @@ function main() {
     export GOPATH="${HOME}/go"
 
     # setup path
-    export PATH="${GOPATH}/bin:${PATH}"
+    export PATH="${GOPATH}/bin:/usr/local/sbin:${PATH}"
 
     export EDITOR="nvim"
 
