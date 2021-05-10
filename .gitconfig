@@ -16,3 +16,5 @@
 [user]
   email = ryan.moran@gmail.com
   name = Ryan Moran
+[fetch]
+  prune = true
