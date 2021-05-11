@@ -116,13 +116,13 @@ function main() {
 }
 
 function reload() {
-  # shellcheck source=/Users/ryanmoran/.bash_profile
+  # shellcheck source=.bash_profile
   source "${HOME}/.bash_profile"
 }
 
 function reinstall() {
   local workspace
-  workspace="${HOME}/workspace/workspace"
+  workspace="${HOME}/workspace/ryanmoran/workspace"
 
   if [[ ! -d "${workspace}" ]]; then
     git clone git@github.com:ryanmoran/workspace "${workspace}"
@@ -136,6 +136,15 @@ function reinstall() {
       echo "Cannot reinstall. There are unstaged changes."
       git diff
     fi
+  popd > /dev/null || return
+}
+
+function update::workspace() {
+  local workspace
+  workspace="${HOME}/workspace/ryanmoran/workspace"
+
+  pushd "${HOME}/workspace" > /dev/null || return
+    bash -c "${workspace}/pull.sh"
   popd > /dev/null || return
 }
 
