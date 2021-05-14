@@ -89,7 +89,7 @@ function repo::pull() {
     return 0
   fi
 
-  if git -C "${dir}" status --short --branch | grep '\[behind\ \d*\]' > /dev/null; then
+  if git -C "${dir}" status --short --branch | grep '\[.*behind\ \d*.*\]' > /dev/null; then
     util::print::yellow "Pulling ${branch}..."
     git -C "${dir}" pull --rebase
     git -C "${dir}" submodule update --init --recursive
