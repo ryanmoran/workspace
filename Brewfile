@@ -1,3 +1,4 @@
+tap 'aquasecurity/trivy'
 tap 'buildpacks/tap'
 tap 'cloudfoundry/tap'
 tap 'git-duet/tap'
@@ -6,6 +7,7 @@ tap 'nektos/tap'
 tap 'pivotal/tap'
 tap 'ryanmoran/tools'
 
+brew 'aquasecurity/trivy/trivy'
 brew 'bash-completion'
 brew 'buildpacks/tap/pack'
 brew 'cloudfoundry/tap/bbl'
