@@ -37,7 +37,7 @@ function main() {
   nvim -c "PlugInstall" -c "PlugUpdate" -c "qall" --headless
   nvim -c "GoInstallBinaries" -c "GoUpdateBinaries" -c "qall!" --headless
 
-  go get -u github.com/onsi/ginkgo/ginkgo
+  go install github.com/onsi/ginkgo/ginkgo@latest
 
   echo "Success!"
 }
