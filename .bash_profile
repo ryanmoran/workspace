@@ -18,6 +18,8 @@ function main() {
 
     # setup path
     export PATH="${GOPATH}/bin:/usr/local/sbin:${PATH}"
+    export PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:${PATH}"
+    export PATH="/usr/local/opt/node@16/bin:${PATH}"
 
     export EDITOR="nvim"
 
@@ -150,5 +152,3 @@ function update::workspace() {
 
 main
 unset -f main
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

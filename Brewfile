@@ -1,4 +1,5 @@
 tap 'anchore/grype'
+tap 'anchore/syft'
 tap 'aquasecurity/trivy'
 tap 'buildpacks/tap'
 tap 'cloudfoundry/tap'
@@ -10,6 +11,7 @@ tap 'pivotal/tap'
 tap 'ryanmoran/tools'
 
 brew 'anchore/grype/grype'
+brew 'anchore/syft/syft'
 brew 'aquasecurity/trivy/trivy'
 brew 'bash-completion'
 brew 'buildpacks/tap/pack'
