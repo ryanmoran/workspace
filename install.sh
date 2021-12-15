@@ -21,6 +21,15 @@ function main() {
   ln -sf "${PROGDIR}/.inputrc" "${HOME}/.inputrc"
   mkdir -pv "${WORKSPACE}"
 
+  if [[ ! -e "${HOME}/.git-authors" ]]; then
+    cat <<-EOF > "${HOME}/.git-authors"
+authors:
+  rm: Ryan Moran; ryan.moran
+email:
+  domain: gmail.com
+EOF
+  fi
+
   mkdir -p "${HOME}/Library/Application Support/Spectacle"
   cp -f "${PROGDIR}/spectacle.json" "${HOME}/Library/Application Support/Spectacle/Shortcuts.json"
 

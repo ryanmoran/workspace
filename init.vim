@@ -13,7 +13,7 @@ Plug 'dense-analysis/ale'      " Linting
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
 Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
-
+Plug 'wfxr/protobuf.vim'
 
 call plug#end()
 
