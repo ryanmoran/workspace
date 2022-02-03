@@ -80,7 +80,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint', 'flow-language-server'],
 \}
 let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = '--enable bodyclose --enable golint --enable gosec --enable unparam --enable scopelint --enable godox --enable testpackage --disable unused --disable deadcode'
+let g:ale_go_golangci_lint_options = '--enable bodyclose --enable revive --enable gosec --enable unparam --enable scopelint --enable godox --enable testpackage --disable unused --disable deadcode'
 
 " Fixing
 let g:ale_fixers = {
