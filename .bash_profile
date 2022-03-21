@@ -20,7 +20,7 @@ function main() {
     export PATH="${GOPATH}/bin:/usr/local/sbin:${PATH}"
     export PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:${PATH}"
     export PATH="/usr/local/opt/node@16/bin:${PATH}"
-    export PATH="${HOME}/google-cloud-sdk/bin:${PATH}"
+    export PATH="${HOME}/.google-cloud-sdk/bin:${PATH}"
 
     export EDITOR="nvim"
 

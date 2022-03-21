@@ -1,7 +1,12 @@
 #!/bin/bash -exu
 
-readonly PROGDIR="$(cd "$(dirname "${0}")" && pwd)"
-readonly WORKSPACE="${HOME}/workspace"
+PROGDIR="$(cd "$(dirname "${0}")" && pwd)"
+WORKSPACE="${HOME}/workspace"
+GCLOUDDIR="${HOME}/.google-cloud-sdk"
+
+readonly PROGDIR
+readonly WORKSPACE
+readonly GCLOUDDIR
 
 function main() {
   if [[ ! -d "/Library/Developer/CommandLineTools" ]]; then
@@ -47,6 +52,15 @@ EOF
   nvim -c "GoInstallBinaries" -c "GoUpdateBinaries" -c "qall!" --headless
 
   go install github.com/onsi/ginkgo/ginkgo@latest
+
+  if [[ ! -e "${GCLOUDDIR}" ]]; then
+    mkdir -p "${GCLOUDDIR}"
+    pushd "${GCLOUDDIR}" > /dev/null || true
+      curl -Lo "${GCLOUDDIR}/sdk.tgz" --create-dirs https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-377.0.0-darwin-x86_64.tar.gz
+      tar xzf "${GCLOUDDIR}/sdk.tgz" --strip-components 1
+      rm "${GCLOUDDIR}/sdk.tgz"
+    popd > /dev/null || true
+  fi
 
   echo "Success!"
 }
