@@ -89,6 +89,7 @@ let g:ale_fixers = {
 
 " Unbreak YAML indents
 autocmd FileType yaml setlocal indentexpr=
+let g:ale_yaml_yamllint_options = '-c ~/.config/nvim/.yamllint'
 
 " Enable autocompletion
 let g:deoplete#enable_at_startup = 1

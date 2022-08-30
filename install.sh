@@ -48,6 +48,7 @@ EOF
   curl -fLo "${HOME}/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   mkdir -p "${HOME}/.config/nvim"
   ln -sf "${PROGDIR}/init.vim" "${HOME}/.config/nvim/init.vim"
+  ln -sf "${PROGDIR}/.yamllint" "${HOME}/.config/nvim/.yamllint"
   nvim -c "PlugInstall" -c "PlugUpdate" -c "qall" --headless
   nvim -c "GoInstallBinaries" -c "GoUpdateBinaries" -c "qall!" --headless
 

@@ -43,6 +43,7 @@ brew 'tree'
 brew 'vmware-tanzu/carvel/ytt'
 brew 'watch'
 brew 'wget'
+brew 'yamllint'
 brew 'yq'
 
 cask 'docker'
