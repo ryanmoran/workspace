@@ -23,7 +23,7 @@ function main() {
 
     export EDITOR="nvim"
 
-    export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/bin/python3"
+    export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/bin/python3.8"
 
     function _bgjobs() {
       local count
