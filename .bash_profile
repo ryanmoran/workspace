@@ -26,6 +26,10 @@ function main() {
 
     export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/bin/python3.8"
 
+    if [[ -e "${HOME}/.github/token" ]]; then
+      export GIT_TOKEN="$(cat "${HOME}/.github/token")"
+    fi
+
     function _bgjobs() {
       local count
       count="$(jobs | wc -l | tr -d ' ')"
