@@ -14,6 +14,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
 Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
 Plug 'wfxr/protobuf.vim'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -125,3 +126,6 @@ endif
 
 " hit the space bar to remove search highlights
 nnoremap <space> :noh<cr>
+
+" Format Terraform files on save
+let g:terraform_fmt_on_save=1
