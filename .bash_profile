@@ -22,6 +22,9 @@ function main() {
     export PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:${PATH}"
     export PATH="${HOME}/.google-cloud-sdk/bin:${PATH}"
 
+    # rust environment
+    source "$HOME/.cargo/env"
+
     export EDITOR="nvim"
 
     export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/bin/python3.8"
