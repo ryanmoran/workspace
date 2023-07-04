@@ -35,9 +35,6 @@ email:
 EOF
   fi
 
-  mkdir -p "${HOME}/Library/Application Support/Spectacle"
-  cp -f "${PROGDIR}/spectacle.json" "${HOME}/Library/Application Support/Spectacle/Shortcuts.json"
-
   if [[ ! -d "${HOME}/.config/colorschemes" ]]; then
     git clone https://github.com/chriskempson/base16-shell.git "${HOME}/.config/colorschemes"
   fi

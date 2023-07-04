@@ -13,6 +13,9 @@ function main() {
 
     export LC_ALL=en_US.UTF-8
 
+    # brew environment
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
     # go environment
     export GOPATH="${HOME}/go"
 
