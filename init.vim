@@ -15,6 +15,7 @@ Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
 Plug 'wfxr/protobuf.vim'
 Plug 'hashivim/vim-terraform'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -68,6 +69,9 @@ let g:go_auto_type_info = 0
 
 " Turn on go-implements
 au FileType go nmap <Leader>i <Plug>(go-implements)
+
+" Rust Declaration
+let g:rustfmt_autosave = 1
 
 " Open test file in new window
 au FileType go nmap <Leader>a <Plug>(go-alternate-vertical)
