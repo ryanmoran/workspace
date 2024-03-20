@@ -39,8 +39,8 @@ EOF
     git clone https://github.com/chriskempson/base16-shell.git "${HOME}/.config/colorschemes"
   fi
 
-  python3 -m pip install --user --upgrade pip
-  python3 -m pip install --user --upgrade pynvim
+  python3 -m pip install --break-system-packages --user --upgrade pip
+  python3 -m pip install --break-system-packages --user --upgrade pynvim
 
   curl -fLo "${HOME}/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   mkdir -p "${HOME}/.config/nvim"

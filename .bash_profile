@@ -26,7 +26,7 @@ function main() {
     export PATH="${HOME}/.google-cloud-sdk/bin:${PATH}"
 
     # rust environment
-    source "$HOME/.cargo/env"
+    # source "$HOME/.cargo/env"
 
     export EDITOR="nvim"
 
