@@ -24,6 +24,7 @@ function main() {
   ln -sf "${PROGDIR}/.bash_profile" "${HOME}/.bash_profile"
   ln -sf "${PROGDIR}/.gitconfig" "${HOME}/.gitconfig"
   ln -sf "${PROGDIR}/.inputrc" "${HOME}/.inputrc"
+  ln -sf "${PROGDIR}/.golangci.yml" "${HOME}/.golangci.yml"
   mkdir -pv "${WORKSPACE}"
 
   if [[ ! -e "${HOME}/.git-authors" ]]; then
