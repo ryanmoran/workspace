@@ -104,9 +104,9 @@ function main() {
 
   function setup_colors() {
     local colorscheme
-    colorscheme="${HOME}/.config/colorschemes/scripts/base16-tomorrow-night.sh"
+    colorscheme="${HOME}/.config/colorschemes/scripts/base16-tomorrow-night-eighties.sh"
 
-    # shellcheck source=/Users/ryanmoran/.config/colorschemes/scripts/base16-tomorrow-night.sh
+    # shellcheck source=/Users/ryanmoran/.config/colorschemes/scripts/base16-tomorrow-night-eighties.sh
     [[ -s "${colorscheme}" ]] && source "${colorscheme}"
   }
 

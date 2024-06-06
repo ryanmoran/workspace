@@ -43,14 +43,12 @@ EOF
   python3 -m pip install --break-system-packages --user --upgrade pip
   python3 -m pip install --break-system-packages --user --upgrade pynvim
 
-  curl -fLo "${HOME}/.local/share/nvim/site/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   mkdir -p "${HOME}/.config/nvim"
-  ln -sf "${PROGDIR}/init.vim" "${HOME}/.config/nvim/init.vim"
-  ln -sf "${PROGDIR}/.yamllint" "${HOME}/.config/nvim/.yamllint"
-  nvim -c "PlugInstall" -c "PlugUpdate" -c "qall" --headless
-  nvim -c "GoInstallBinaries" -c "GoUpdateBinaries" -c "qall!" --headless
+  ln -sf "${PROGDIR}/nvim/init.lua" "${HOME}/.config/nvim/init.lua"
+  ln -sf "${PROGDIR}/nvim/lua" "${HOME}/.config/nvim/lua"
+  ln -sf "${PROGDIR}/nvim/.yamllint" "${HOME}/.config/nvim/.yamllint"
 
-  go install github.com/onsi/ginkgo/ginkgo@latest
+  nvim --headless "+Lazy! sync" +qa
 
   if [[ ! -e "${GCLOUDDIR}" ]]; then
     mkdir -p "${GCLOUDDIR}"
