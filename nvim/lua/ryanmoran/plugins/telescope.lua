@@ -14,6 +14,7 @@ return {
     config = function()
         local telescope = require("telescope")
         local actions = require("telescope.actions")
+        local fb_actions = require("telescope").extensions.file_browser.actions
 
         telescope.setup({
             defaults = {
@@ -26,6 +27,9 @@ return {
                         ["<C-j>"] = actions.move_selection_next, -- move to next result
                         ["<C-q>"] = actions.send_selected_to_qflist +
                             actions.open_qflist -- send selected to quickfixlist
+                    },
+                    n = {
+                        ["-"] = fb_actions.goto_parent_dir
                     }
                 }
             },
