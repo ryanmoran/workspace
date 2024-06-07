@@ -44,7 +44,7 @@ map("n", "<leader>y", "\"*y", { noremap = true })
 
 -- Maintain undo history between sessions
 vim.opt.undofile = true
-vim.opt.undodir = "~/.config/nvim/undodir"
+vim.opt.undodir = vim.fn.stdpath('config') .. '/undo'
 
 -- filetype related
 vim.api.nvim_create_autocmd("FileType", {
