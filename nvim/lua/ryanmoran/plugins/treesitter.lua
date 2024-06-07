@@ -10,8 +10,6 @@ return {
         }
     },
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
-
         vim.api.nvim_create_autocmd("FileType", {
             pattern = {"markdown"},
             callback = function(ev)
@@ -20,6 +18,7 @@ return {
             end
         })
 
+        local treesitter = require("nvim-treesitter.configs")
         treesitter.setup({
             ensure_installed = {
               "bash", "c", "cpp", "css", "csv", "dockerfile", "dot",
