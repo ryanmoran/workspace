@@ -32,6 +32,10 @@ function main() {
 
     export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/bin/python3.8"
 
+    if [[ -f "${HOME}/.config/bash/privaterc" ]]; then
+      source "${HOME}/.config/bash/privaterc"
+    fi
+
     if [[ -e "${HOME}/.github/token" ]]; then
       export GIT_TOKEN="$(cat "${HOME}/.github/token")"
     fi
