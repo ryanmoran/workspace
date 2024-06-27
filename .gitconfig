@@ -4,20 +4,31 @@
   ci = duet-commit
   lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
   prune-branches = !git branch -vv | grep '\\:\\ gone\\]' | awk '{print $1}' | xargs -n1 git branch -D
+
 [core]
   editor = nvim
+
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+
 [push]
   default = simple
+
 [submodule]
   fetchJobs = 6
+
 [diff]
   compactionHeuristic = true
+
 [user]
   email = ryan.moran@gmail.com
   name = Ryan Moran
+
 [fetch]
   prune = true
+
 [init]
   defaultBranch = main
