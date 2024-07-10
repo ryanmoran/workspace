@@ -119,12 +119,12 @@ function main() {
   }
 
   local dependencies
-    dependencies=(
-        aliases
-        environment
-        colors
-        completions
-      )
+  dependencies=(
+    aliases
+    environment
+    colors
+    completions
+  )
 
   for dependency in "${dependencies[@]}"; do
     eval "setup_${dependency}"
@@ -145,24 +145,24 @@ function reinstall() {
     git clone git@github.com:ryanmoran/workspace "${workspace}"
   fi
 
-  pushd "${workspace}" > /dev/null || return
-    if git diff --exit-code > /dev/null ; then
-      git pull -r
-      bash -c "./install.sh"
-    else
-      echo "Cannot reinstall. There are unstaged changes."
-      git diff
-    fi
-  popd > /dev/null || return
+  pushd "${workspace}" >/dev/null || return
+  if git diff --exit-code >/dev/null; then
+    git pull -r
+    bash -c "./install.sh"
+  else
+    echo "Cannot reinstall. There are unstaged changes."
+    git diff
+  fi
+  popd >/dev/null || return
 }
 
 function update::workspace() {
   local workspace
   workspace="${HOME}/workspace/ryanmoran/workspace"
 
-  pushd "${HOME}/workspace" > /dev/null || return
-    bash -c "${workspace}/pull.sh"
-  popd > /dev/null || return
+  pushd "${HOME}/workspace" >/dev/null || return
+  bash -c "${workspace}/pull.sh"
+  popd >/dev/null || return
 }
 
 main

@@ -1,1 +1,1 @@
-return {"chrisbra/csv.vim", enabled = true}
+return { "chrisbra/csv.vim", enabled = true }

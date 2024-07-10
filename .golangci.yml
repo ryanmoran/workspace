@@ -1,5 +1,5 @@
 ---
 linters-settings:
   revive:
-  - name: dot-imports
-    disabled: true
+    - name: dot-imports
+      disabled: true

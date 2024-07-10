@@ -27,7 +27,7 @@ vim.opt.wrap = false
 vim.opt.directory = "/tmp"
 
 -- Hidden characters
-vim.opt.listchars = { tab = '  ', trail = '█' }
+vim.opt.listchars = { tab = "  ", trail = "█" }
 vim.opt.list = true
 
 local map = vim.api.nvim_set_keymap
@@ -39,26 +39,26 @@ map("n", "N", "Nzzzv", { noremap = true })
 map("n", "<space>", ":noh<CR>", { noremap = true }) -- hit the space bar to remove search highlights
 
 -- Yank to system clipboard
-map("v", "<leader>y", "\"*y", { noremap = true })
-map("n", "<leader>y", "\"*y", { noremap = true })
+map("v", "<leader>y", '"*y', { noremap = true })
+map("n", "<leader>y", '"*y', { noremap = true })
 
 -- Maintain undo history between sessions
 vim.opt.undofile = true
-vim.opt.undodir = vim.fn.stdpath('config') .. '/undo'
+vim.opt.undodir = vim.fn.stdpath("config") .. "/undo"
 
 -- filetype related
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"gitcommit"},
-    callback = function(ev)
-        vim.api.nvim_set_option_value("textwidth", 72, {scope = "local"})
-    end
+	pattern = { "gitcommit" },
+	callback = function(ev)
+		vim.api.nvim_set_option_value("textwidth", 72, { scope = "local" })
+	end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"markdown"},
-    callback = function(ev)
-        vim.api.nvim_set_option_value("textwidth", 0, {scope = "local"})
-        vim.api.nvim_set_option_value("wrapmargin", 0, {scope = "local"})
-        vim.api.nvim_set_option_value("linebreak", false, {scope = "local"})
-    end
+	pattern = { "markdown" },
+	callback = function(ev)
+		vim.api.nvim_set_option_value("textwidth", 0, { scope = "local" })
+		vim.api.nvim_set_option_value("wrapmargin", 0, { scope = "local" })
+		vim.api.nvim_set_option_value("linebreak", false, { scope = "local" })
+	end,
 })

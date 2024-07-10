@@ -28,7 +28,7 @@ function main() {
   mkdir -pv "${WORKSPACE}"
 
   if [[ ! -e "${HOME}/.git-authors" ]]; then
-    cat <<-EOF > "${HOME}/.git-authors"
+    cat <<-EOF >"${HOME}/.git-authors"
 authors:
   rm: Ryan Moran; ryan.moran
 email:
@@ -52,11 +52,11 @@ EOF
 
   if [[ ! -e "${GCLOUDDIR}" ]]; then
     mkdir -p "${GCLOUDDIR}"
-    pushd "${GCLOUDDIR}" > /dev/null || true
-      curl -Lo "${GCLOUDDIR}/sdk.tgz" --create-dirs https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-377.0.0-darwin-x86_64.tar.gz
-      tar xzf "${GCLOUDDIR}/sdk.tgz" --strip-components 1
-      rm "${GCLOUDDIR}/sdk.tgz"
-    popd > /dev/null || true
+    pushd "${GCLOUDDIR}" >/dev/null || true
+    curl -Lo "${GCLOUDDIR}/sdk.tgz" --create-dirs https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-377.0.0-darwin-x86_64.tar.gz
+    tar xzf "${GCLOUDDIR}/sdk.tgz" --strip-components 1
+    rm "${GCLOUDDIR}/sdk.tgz"
+    popd >/dev/null || true
   fi
 
   echo "Success!"
