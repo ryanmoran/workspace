@@ -37,7 +37,8 @@ function main() {
     fi
 
     if [[ -e "${HOME}/.github/token" ]]; then
-      export GIT_TOKEN="$(cat "${HOME}/.github/token")"
+      GIT_TOKEN="$(cat "${HOME}/.github/token")"
+      export GIT_TOKEN
     fi
 
     function _bgjobs() {
