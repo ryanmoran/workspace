@@ -1,7 +1,7 @@
 [alias]
   st = status
   co = checkout
-  ci = duet-commit
+  ci = commit
   lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
   prune-branches = !git branch -vv | grep '\\:\\ gone\\]' | awk '{print $1}' | xargs -n1 git branch -D
 

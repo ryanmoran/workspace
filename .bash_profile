@@ -21,24 +21,20 @@ function main() {
 
     # setup path
     export PATH="${GOPATH}/bin:/usr/local/sbin:${PATH}"
-    export PATH="/usr/local/opt/ruby/bin:${PATH}"
-    export PATH="${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin:${PATH}"
-    export PATH="${HOME}/.google-cloud-sdk/bin:${PATH}"
-
-    # rust environment
-    # source "$HOME/.cargo/env"
+    export PATH="${HOME}/.local/share/nvim/mason/bin:${PATH}"
 
     export EDITOR="nvim"
 
-    export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/bin/python3.8"
+    if [[ -f "${HOME}/.config/git/completions.bash" ]]; then
+      source "${HOME}/.config/git/completions.bash"
+    fi
 
     if [[ -f "${HOME}/.config/bash/privaterc" ]]; then
       source "${HOME}/.config/bash/privaterc"
     fi
 
-    if [[ -e "${HOME}/.github/token" ]]; then
-      GIT_TOKEN="$(cat "${HOME}/.github/token")"
-      export GIT_TOKEN
+    if [[ -f "${HOME}/.config/workrc" ]]; then
+      source "${HOME}/.config/workrc"
     fi
 
     function _bgjobs() {
@@ -103,16 +99,10 @@ function main() {
     }
 
     if [[ "${PROMPT_COMMAND}" != *"_prompt"* ]]; then
-      PROMPT_COMMAND="_prompt;$PROMPT_COMMAND"
+      PROMPT_COMMAND="_prompt;${PROMPT_COMMAND}"
     fi
-  }
 
-  function setup_colors() {
-    local colorscheme
-    colorscheme="${HOME}/.config/colorschemes/scripts/base16-tomorrow-night-eighties.sh"
-
-    # shellcheck source=/Users/ryanmoran/.config/colorschemes/scripts/base16-tomorrow-night-eighties.sh
-    [[ -s "${colorscheme}" ]] && source "${colorscheme}"
+    eval "$(direnv hook bash)"
   }
 
   function setup_completions() {
@@ -123,7 +113,6 @@ function main() {
   dependencies=(
     aliases
     environment
-    colors
     completions
   )
 

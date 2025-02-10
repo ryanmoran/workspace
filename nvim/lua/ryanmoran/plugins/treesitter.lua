@@ -1,6 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	tag = "v0.9.2",
 	build = ":TSUpdate",
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" }, -- Syntax aware text-objects
@@ -12,7 +11,7 @@ return {
 	config = function()
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = { "markdown" },
-			callback = function(ev)
+			callback = function(_)
 				-- treesitter-context is buggy with Markdown files
 				require("treesitter-context").disable()
 			end,
@@ -26,7 +25,6 @@ return {
 				"cpp",
 				"css",
 				"csv",
-				"dockerfile",
 				"dot",
 				"gitignore",
 				"go",
@@ -44,6 +42,7 @@ return {
 				"sql",
 				"toml",
 				"typescript",
+				"tsx",
 				"yaml",
 			},
 			indent = { enable = true },
@@ -55,5 +54,18 @@ return {
 			},
 			textobjects = { select = { enable = true, lookahead = true } },
 		})
+
+		local opts = { noremap = true, silent = true }
+
+		local function quickfix()
+			vim.lsp.buf.code_action({})
+		end
+
+		local function showerror()
+			vim.diagnostic.open_float()
+		end
+
+		vim.keymap.set("n", "<leader>qf", quickfix, opts)
+		vim.keymap.set("n", "<space>e", showerror, opts)
 	end,
 }

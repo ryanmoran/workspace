@@ -51,8 +51,6 @@ return {
 		telescope.load_extension("file_browser")
 		telescope.load_extension("fzf")
 
-		-- key maps
-
 		local map = vim.keymap.set
 		map("n", "-", ":Telescope file_browser<CR>")
 		map("n", "ff", require("telescope").extensions.live_grep_args.live_grep_args, { noremap = true })

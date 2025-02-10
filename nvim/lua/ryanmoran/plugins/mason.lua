@@ -21,7 +21,7 @@ return {
 		})
 
 		lspconfig.setup({
-			ensure_installed = { "tsserver" },
+			ensure_installed = { "ts_ls" },
 		})
 
 		installer.setup({
