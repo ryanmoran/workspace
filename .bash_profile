@@ -22,6 +22,8 @@ function main() {
     # setup path
     export PATH="${GOPATH}/bin:/usr/local/sbin:${PATH}"
     export PATH="${HOME}/.local/share/nvim/mason/bin:${PATH}"
+    export PATH="${HOME}/.local/bin:${PATH}"
+    export PATH="$(brew --prefix python@3.11)/libexec/bin:${PATH}"
 
     export EDITOR="nvim"
 
