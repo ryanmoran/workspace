@@ -39,6 +39,12 @@ return {
 			"~/.config/nvim/.yamllint",
 		}
 
+		lint.linters.markdownlint.args = {
+			"--stdin",
+			"--disable",
+			"MD024",
+		}
+
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 			group = lint_augroup,

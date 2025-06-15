@@ -27,6 +27,9 @@ function main() {
   mkdir -p "${HOME}/.config/git"
   curl -s "https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/completion/git-completion.bash" >"${HOME}/.config/git/completions.bash"
 
+  mkdir -p "${HOME}/.config/docker"
+  docker completion bash >"${HOME}/.config/docker/completions.bash"
+
   ln -sf "${PROGDIR}/.bash_profile" "${HOME}/.bash_profile"
   ln -sf "${PROGDIR}/.inputrc" "${HOME}/.inputrc"
   ln -sf "${PROGDIR}/.golangci.yml" "${HOME}/.golangci.yml"

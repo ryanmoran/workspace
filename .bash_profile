@@ -31,12 +31,12 @@ function main() {
       source "${HOME}/.config/git/completions.bash"
     fi
 
-    if [[ -f "${HOME}/.config/bash/privaterc" ]]; then
-      source "${HOME}/.config/bash/privaterc"
+    if [[ -f "${HOME}/.config/docker/completions.bash" ]]; then
+      source "${HOME}/.config/docker/completions.bash"
     fi
 
-    if [[ -f "${HOME}/.config/workrc" ]]; then
-      source "${HOME}/.config/workrc"
+    if [[ -f "${HOME}/.config/bash/workrc" ]]; then
+      source "${HOME}/.config/bash/workrc"
     fi
 
     function _bgjobs() {

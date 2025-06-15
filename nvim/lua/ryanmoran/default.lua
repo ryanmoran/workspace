@@ -42,6 +42,9 @@ map("n", "<space>", ":noh<CR>", { noremap = true }) -- hit the space bar to remo
 map("v", "<leader>y", '"*y', { noremap = true })
 map("n", "<leader>y", '"*y', { noremap = true })
 
+-- Toggle go inlay hints
+map("n", "<leader>i", ":GoToggleInlay<CR>", { noremap = true })
+
 -- Maintain undo history between sessions
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("config") .. "/undo"

@@ -8,6 +8,7 @@ return {
 			formatters_by_ft = {
 				css = { "prettier" },
 				go = { "goimports" },
+				proto = { "buf" },
 				html = { "prettier" },
 				javascript = { "prettier" },
 				javascriptreact = { "prettier" },
