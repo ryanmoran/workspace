@@ -1,0 +1,17 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "lsp": {
+    "go": {
+      "command": "gopls",
+      "env": {
+        "GOTOOLCHAIN": "go1.25.5"
+      }
+    }
+  },
+  "options": {
+    "attribution": {
+      "trailer_style": "none",
+      "generated_with": false
+    }
+  }
+}
