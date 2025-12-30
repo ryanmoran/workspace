@@ -8,6 +8,11 @@ function main() {
   }
 
   function setup_environment() {
+    # Ghostty shell integration for Bash. This should be at the top of your bashrc!
+    if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+      builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+    fi
+
     export CLICOLOR=1
     export LSCOLORS exfxcxdxbxegedabagacad
 
@@ -35,8 +40,8 @@ function main() {
       source "${HOME}/.config/docker/completions.bash"
     fi
 
-    if [[ -f "${HOME}/.config/bash/workrc" ]]; then
-      source "${HOME}/.config/bash/workrc"
+    if [[ -f "${HOME}/.config/bash/privaterc" ]]; then
+      source "${HOME}/.config/bash/privaterc"
     fi
 
     function _bgjobs() {

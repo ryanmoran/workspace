@@ -11,6 +11,3 @@ macos-titlebar-style = tabs
 
 auto-update = download
 auto-update-channel = stable
-
-shell-integration = bash
-shell-integration-features = true

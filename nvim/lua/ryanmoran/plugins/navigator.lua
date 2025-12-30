@@ -19,7 +19,11 @@ return {
 		},
 	},
 	config = function()
-		require("go").setup()
+		require("go").setup({
+			lsp_inlay_hints = {
+				enable = false,
+			},
+		})
 		require("navigator").setup({
 			lsp_signature_help = true, -- enable ray-x/lsp_signature
 			lsp = { format_on_save = { disable = { "go" } } },
