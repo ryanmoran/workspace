@@ -11,6 +11,8 @@ Create product vision documents that non-technical stakeholders can understand, 
 
 **Core principle:** If a stakeholder needs to ask "what does this mean?" or "why should I care?", the document has failed.
 
+Start by understanding the current product context, then ask questions one at a time to refine the new idea. Once you understand what you're building, present the vision in small sections (200-300 words), checking after each section whether it looks right so far.
+
 ## When to Use
 
 - Creating pitch documents for investors or executives
@@ -29,17 +31,18 @@ Use Geoffrey Moore's template:
 > **For** [target users] **who** [have this need/problem], **the** [product name] **is a** [product category] **that** [key benefit]. **Unlike** [alternatives], **our product** [key differentiator].
 
 **Example:**
+
 > For busy parents who struggle to manage their children's screen time, ScreenTime Guardian is a family wellness app that creates healthy digital boundaries through collaboration. Unlike surveillance-focused competitors, our product teaches children self-regulation skills.
 
 ### 2. Problem Statement (Required)
 
 Define the problem in human terms:
 
-| Element | Description |
-|---------|-------------|
-| **Who feels the pain** | Specific user segment, not "everyone" |
-| **What the pain is** | Observable behavior or frustration |
-| **Why it matters** | Consequences of not solving it |
+| Element                 | Description                              |
+| ----------------------- | ---------------------------------------- |
+| **Who feels the pain**  | Specific user segment, not "everyone"    |
+| **What the pain is**    | Observable behavior or frustration       |
+| **Why it matters**      | Consequences of not solving it           |
 | **Current workarounds** | How people cope today (and why it fails) |
 
 **Bad:** "Users need better analytics"
@@ -71,6 +74,7 @@ W   │                             │                             │
 ```
 
 For each stakeholder group, document:
+
 - **Who they are** (role, not name)
 - **What they need** from this product
 - **How we communicate** with them
@@ -85,7 +89,7 @@ Create 2-3 personas using Jobs-to-be-Done (JTBD) format:
 
 **Situation:** [Context when they need this product]
 
-**Job to be Done:** 
+**Job to be Done:**
 When I [situation/trigger], I want to [action/capability], so I can [desired outcome].
 
 **Functional needs:** [What they need to accomplish]
@@ -99,14 +103,16 @@ When I [situation/trigger], I want to [action/capability], so I can [desired out
 ### 5. User Workflow Diagrams (Required)
 
 Visualize key user journeys using swimlane diagrams. These show:
+
 - Different actors (parent, child, system)
 - Steps in their process
 - Decision points
 - Handoffs between actors
 
-**Format:** Use ASCII diagrams with clear labels. See diagrams.md for templates.
+**Format:** Use Mermaid diagrams (preferred) or ASCII as fallback. See diagrams.md for templates.
 
 **Every workflow must show:**
+
 1. **Trigger** — What starts this flow?
 2. **Happy path** — Main success scenario
 3. **Decision points** — Where users make choices
@@ -124,18 +130,21 @@ Write use cases in plain language, not technical specifications:
 **Trigger:** [What starts this use case]
 
 **Main Flow:**
+
 1. [Actor] does [action]
 2. System [response]
 3. [Actor] sees [result]
 4. [Continue until goal achieved]
 
 **Alternative Flows:**
+
 - If [condition], then [what happens]
 
 **Success Criteria:** [How actor knows they succeeded]
 ```
 
 **Non-technical language rules:**
+
 - Use "sees" not "renders"
 - Use "saves" not "persists to database"
 - Use "notifies" not "sends push notification via FCM"
@@ -145,10 +154,10 @@ Write use cases in plain language, not technical specifications:
 
 Present features from user benefit perspective:
 
-| What Users Can Do | Why It Matters | Who Benefits |
-|-------------------|----------------|--------------|
-| Set daily time limits | Peace of mind, consistent boundaries | Parents |
-| Earn bonus time | Motivation through positive reinforcement | Children |
+| What Users Can Do     | Why It Matters                            | Who Benefits |
+| --------------------- | ----------------------------------------- | ------------ |
+| Set daily time limits | Peace of mind, consistent boundaries      | Parents      |
+| Earn bonus time       | Motivation through positive reinforcement | Children     |
 
 **Avoid:** Feature lists with technical specs
 **Include:** How each feature solves a problem from Section 2
@@ -158,11 +167,13 @@ Present features from user benefit perspective:
 Define measurable outcomes for both users AND business:
 
 **User Success:**
+
 - What behavior changes?
 - What pain decreases?
 - What goal becomes achievable?
 
 **Business Success:**
+
 - Adoption metrics
 - Engagement metrics
 - Revenue/growth metrics
@@ -171,9 +182,9 @@ Define measurable outcomes for both users AND business:
 
 If included, use a simple comparison:
 
-| | Our Product | Alternative A | Alternative B |
-|---|-------------|---------------|---------------|
-| **Key Differentiator** | ✓ | ✗ | Partial |
+|                        | Our Product | Alternative A | Alternative B |
+| ---------------------- | ----------- | ------------- | ------------- |
+| **Key Differentiator** | ✓           | ✗             | Partial       |
 
 Avoid: Long competitor teardowns
 Include: Clear reason why users choose us
@@ -182,25 +193,39 @@ Include: Clear reason why users choose us
 
 ### Language Rules
 
-| Instead of... | Write... |
-|---------------|----------|
-| API, SDK, backend | "the system" or "behind the scenes" |
-| Database, storage | "saves your information" |
-| Algorithm | "smart suggestions" |
-| Real-time sync | "updates instantly" |
-| Push notifications | "alerts you" |
-| Authentication | "secure login" |
-| UI/UX | "design" or "experience" |
+| Instead of...      | Write...                            |
+| ------------------ | ----------------------------------- |
+| API, SDK, backend  | "the system" or "behind the scenes" |
+| Database, storage  | "saves your information"            |
+| Algorithm          | "smart suggestions"                 |
+| Real-time sync     | "updates instantly"                 |
+| Push notifications | "alerts you"                        |
+| Authentication     | "secure login"                      |
+| UI/UX              | "design" or "experience"            |
 
 ### Diagram Guidelines
 
-Use ASCII or Mermaid diagrams that can render in any environment.
+**Prefer Mermaid diagrams** — they render consistently across tools (GitHub, Notion, VS Code, etc.).
 
-**For workflows:** Use swimlane format (see diagrams.md)
-**For architecture:** Use simplified box diagrams showing user-visible components only
+**When to use Mermaid:**
+
+- Flowcharts and decision trees
+- Sequence diagrams (actor interactions)
+- User journey maps
+- Quadrant charts (stakeholder maps)
+
+**When to use ASCII (fallback):**
+
+- Complex swimlane layouts Mermaid can't represent
+- Custom visual arrangements
+- When Mermaid syntax becomes unwieldy
+
+**For workflows:** Use flowchart or sequence diagrams (see diagrams.md)
+**For stakeholder maps:** Use quadrantChart (see diagrams.md)
 **For comparisons:** Use tables
 
 **Never include:**
+
 - Technical architecture (servers, databases, APIs)
 - Code snippets
 - Data models
@@ -209,6 +234,7 @@ Use ASCII or Mermaid diagrams that can render in any environment.
 ### Readability Checklist
 
 Before finalizing, verify:
+
 - [ ] Can be read in under 10 minutes
 - [ ] Every section answers "why should I care?"
 - [ ] No unexplained acronyms
@@ -218,27 +244,27 @@ Before finalizing, verify:
 
 ## Quick Reference
 
-| Section | Purpose | Length |
-|---------|---------|--------|
-| Vision Statement | Align everyone on direction | 2-3 sentences |
-| Problem Statement | Create urgency and empathy | 1 paragraph + table |
-| Stakeholder Map | Show who cares and why | Grid + 3-5 groups |
-| Personas | Make users real | 2-3 personas |
-| Workflows | Show how it works | 2-4 diagrams |
-| Use Cases | Detail key interactions | 3-6 use cases |
-| Features | Connect solutions to problems | Table format |
-| Success Metrics | Define winning | User + Business metrics |
+| Section           | Purpose                       | Length                  |
+| ----------------- | ----------------------------- | ----------------------- |
+| Vision Statement  | Align everyone on direction   | 2-3 sentences           |
+| Problem Statement | Create urgency and empathy    | 1 paragraph + table     |
+| Stakeholder Map   | Show who cares and why        | Grid + 3-5 groups       |
+| Personas          | Make users real               | 2-3 personas            |
+| Workflows         | Show how it works             | 2-4 diagrams            |
+| Use Cases         | Detail key interactions       | 3-6 use cases           |
+| Features          | Connect solutions to problems | Table format            |
+| Success Metrics   | Define winning                | User + Business metrics |
 
 ## Common Mistakes
 
-| Mistake | Why It's Wrong | Fix |
-|---------|----------------|-----|
-| Starting with features | Puts solution before problem | Start with vision and problem |
-| Technical jargon | Alienates non-technical readers | Use language rules above |
-| Vague stakeholders | "Users" isn't actionable | Name specific roles and needs |
-| Missing workflows | Hard to understand the experience | Add visual flows |
-| No success metrics | Can't measure progress | Define user AND business metrics |
-| Too long | Won't be read | Target 10-minute read time |
+| Mistake                | Why It's Wrong                    | Fix                              |
+| ---------------------- | --------------------------------- | -------------------------------- |
+| Starting with features | Puts solution before problem      | Start with vision and problem    |
+| Technical jargon       | Alienates non-technical readers   | Use language rules above         |
+| Vague stakeholders     | "Users" isn't actionable          | Name specific roles and needs    |
+| Missing workflows      | Hard to understand the experience | Add visual flows                 |
+| No success metrics     | Can't measure progress            | Define user AND business metrics |
+| Too long               | Won't be read                     | Target 10-minute read time       |
 
 ## Supporting Files
 

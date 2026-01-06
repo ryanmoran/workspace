@@ -23,21 +23,26 @@ This is a complete example showing all required sections from the product-vision
 
 ## 3. Stakeholder Map
 
-```
-                          INTEREST IN PRODUCT
-                    Low                        High
-                ┌─────────────────────┬─────────────────────┐
-                │                     │                     │
-           High │  KEEP SATISFIED     │  MANAGE CLOSELY     │
-                │  • Investors        │  • Parents (buyers) │
-                │  • App store teams  │  • Product team     │
-     POWER      │                     │  • Early adopters   │
-                ├─────────────────────┼─────────────────────┤
-           Low  │  MONITOR            │  KEEP INFORMED      │
-                │  • General public   │  • Children (users) │
-                │  • Competitors      │  • Pediatricians    │
-                │                     │  • School partners  │
-                └─────────────────────┴─────────────────────┘
+```mermaid
+quadrantChart
+    title Stakeholder Power-Interest Grid
+    x-axis Low Interest --> High Interest
+    y-axis Low Power --> High Power
+    quadrant-1 Manage Closely
+    quadrant-2 Keep Satisfied
+    quadrant-3 Monitor
+    quadrant-4 Keep Informed
+    
+    Parents: [0.85, 0.8]
+    Product Team: [0.9, 0.7]
+    Early Adopters: [0.75, 0.65]
+    Investors: [0.3, 0.85]
+    App Store Teams: [0.25, 0.7]
+    Children: [0.8, 0.25]
+    Pediatricians: [0.7, 0.3]
+    School Partners: [0.65, 0.25]
+    Competitors: [0.2, 0.2]
+    General Public: [0.15, 0.15]
 ```
 
 ---
@@ -62,37 +67,16 @@ When I come home from work exhausted, I want to know my kids stayed within healt
 
 ## 5. User Workflow: Child Requests More Time
 
-```
-                        ┌──────────────────┐
-                        │   TIME LIMIT     │
-                        │   REACHED        │
-                        └────────┬─────────┘
-                                 │
-                                 ▼
-                    ┌────────────────────────┐
-                    │  Request more time?    │
-                    └────────────┬───────────┘
-                                 │
-              ┌──────────────────┼──────────────────┐
-              │ Yes              │ No               │
-              ▼                  ▼                  │
-       ┌──────────────┐   ┌──────────────┐         │
-       │ Pick reason  │   │ Device locks │         │
-       └──────┬───────┘   │ gracefully   │         │
-              │           └──────────────┘         │
-              ▼                                     │
-       ┌──────────────┐                            │
-       │ Parent       │                            │
-       │ notified     │                            │
-       └──────┬───────┘                            │
-              │                                     │
-    ┌─────────┴─────────┐                          │
-    │ Approve │ Decline │                          │
-    ▼         ▼                                    │
-┌────────┐ ┌──────────┐                            │
-│+30 min │ │"Maybe    │                            │
-│granted │ │tomorrow!"│                            │
-└────────┘ └──────────┘                            │
+```mermaid
+flowchart TD
+    A[⏰ Time Limit Reached] --> B[Child sees: '5 minutes left']
+    B --> C{Request more time?}
+    C -->|Yes| D[Pick reason]
+    C -->|No| E[Device locks gracefully]
+    D --> F[Parent gets notification]
+    F --> G{Parent approves?}
+    G -->|Yes| H[✅ +30 min granted]
+    G -->|No| I[Device locks with kind message]
 ```
 
 ---
