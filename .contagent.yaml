@@ -1,0 +1,7 @@
+dockerfile: ~/Desktop/Dockerfile.contagent
+env:
+  CRUSH_SKILLS_DIR: /skills
+  CRUSH_GLOBAL_CONFIG: /crush
+volumes:
+  - ~/workspace/ryanmoran/workspace/skills:/skills:ro
+  - ~/workspace/ryanmoran/workspace/crush:/crush:ro
