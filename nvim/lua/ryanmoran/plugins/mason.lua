@@ -39,6 +39,7 @@ return {
 				"stylelint",
 				"stylua",
 				"typescript-language-server",
+				"yamlfmt",
 				"yamllint",
 			},
 		})

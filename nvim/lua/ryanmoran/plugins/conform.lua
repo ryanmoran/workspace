@@ -18,7 +18,7 @@ return {
 				sh = { "shfmt" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
-				yaml = { "prettier" },
+				yaml = { "yamlfmt" },
 			},
 			format_on_save = { timeout_ms = 5000, lsp_format = "fallback" },
 		})

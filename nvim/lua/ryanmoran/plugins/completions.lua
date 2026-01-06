@@ -74,12 +74,5 @@ return {
 				}),
 			},
 		})
-
-		local lspconfig = require("lspconfig")
-
-		-- All languages: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-
-		-- Default lspconfig values for Go are set by `navigator`
-		-- Go: go install golang.org/x/tools/gopls@latest
 	end,
 }
