@@ -46,6 +46,8 @@ Start by exploring the current state and gathering requirements:
 - Success criteria and non-goals
 - Timeline expectations
 
+**VERY IMPORTANT: Do this phase even if the user has provided context documents or an existing proposal. Break the proposal or context down into pieces and explore them with the user. We need to discuss the idea before we write the document.**
+
 ### Phase 2: Exploring Approaches
 
 Once context is clear, explore solution approaches:
