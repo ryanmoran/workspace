@@ -75,11 +75,13 @@ vi <file>
 ```
 
 Configuration in `/app/nvim/`:
+
 - `init.lua` - Entry point
 - `lua/ryanmoran/default.lua` - Core settings
 - `lua/ryanmoran/plugins/` - Plugin configurations
 
 **Neovim Settings:**
+
 - Tab/indent: 2 spaces (expandtab)
 - Text width: 120 chars
 - Spell check: enabled (en_us)
@@ -128,6 +130,7 @@ Configuration in `/app/nvim/`:
 **Linting**: Use `golangci-lint` with comprehensive ruleset (`.golangci.yml`)
 
 **Enabled linters:**
+
 - Standard: govet, staticcheck, gosimple, typecheck, ineffassign, unused
 - Error handling: errcheck, errorlint, rowserrcheck
 - Style: stylecheck, goimports, gocritic, whitespace, misspell
@@ -136,6 +139,7 @@ Configuration in `/app/nvim/`:
 - Dependencies: depguard (blocks deprecated packages)
 
 **Key rules:**
+
 - Use `log/slog` (not `golang.org/x/exp/slog` or `github.com/pingcap/log`)
 - Use stdlib `errors`, `slices` (not `github.com/pkg/errors`, `golang.org/x/exp/slices`)
 - Use `testify/require` (not `testify/assert`)
@@ -146,6 +150,7 @@ Configuration in `/app/nvim/`:
 - US spelling: `locale: US` (but allow "cancelled")
 
 **Exclusions:**
+
 - Tests: exhaustruct checks disabled for `_test.go` files
 - Directories: `generated/proto`, `internal/datastores/generated`
 
@@ -175,9 +180,11 @@ This repository includes **skills** - reusable workflow patterns for AI agents. 
 ### Available Skills
 
 #### brainstorming
+
 **When to use:** Before any creative work - creating features, building components, adding functionality
 
 **Process:**
+
 1. Understand current project context
 2. Ask questions one at a time to refine the idea
 3. Propose 2-3 approaches with trade-offs
@@ -188,11 +195,13 @@ This repository includes **skills** - reusable workflow patterns for AI agents. 
 **Key principle:** Natural collaborative dialogue, not a requirements extraction interview
 
 #### test-driven-development (TDD)
+
 **When to use:** Implementing any feature or bugfix
 
 **Iron Law:** NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 
 **Process:**
+
 1. RED: Write test, watch it fail (proves test works)
 2. GREEN: Write minimal code to pass
 3. REFACTOR: Clean up while keeping tests green
@@ -201,9 +210,11 @@ This repository includes **skills** - reusable workflow patterns for AI agents. 
 **Violations:** If you write code before the test, delete it and start over. No exceptions.
 
 #### development-workflow
+
 **When to use:** Starting features, bugs, or significant changes requiring multiple commits
 
 **Phases:** (May repeat)
+
 1. DESIGN: Understand & plan (use brainstorming skill)
 2. IMPLEMENT: Build with TDD (use test-driven-development skill)
 3. REFINE: Simplify & improve
@@ -213,11 +224,13 @@ This repository includes **skills** - reusable workflow patterns for AI agents. 
 **Not for:** Trivial one-line fixes, emergency hotfixes, throwaway prototypes
 
 #### writing-skills
+
 **When to use:** Creating new skills, editing existing skills, verifying skills work
 
 **Core principle:** Writing skills IS Test-Driven Development applied to process documentation
 
 **Process:**
+
 1. RED: Run baseline scenario WITHOUT skill, document violations
 2. GREEN: Write skill addressing specific violations, verify compliance
 3. REFACTOR: Find new rationalizations, plug loopholes, re-verify
@@ -226,6 +239,7 @@ This repository includes **skills** - reusable workflow patterns for AI agents. 
 **Skills are NOT:** Narratives about how you solved a problem once
 
 See `/app/skills/writing-skills/` for comprehensive guidance:
+
 - `SKILL.md` - Main skill documentation
 - `anthropic-best-practices.md` - Official Anthropic guidance on skill authoring
 - `testing-skills-with-subagents.md` - How to test skills with pressure scenarios
@@ -234,6 +248,7 @@ See `/app/skills/writing-skills/` for comprehensive guidance:
 - `render-graphs.js` - Script for rendering Mermaid/Graphviz diagrams
 
 #### product-vision-document
+
 **When to use:** Creating product vision documents for non-technical stakeholders
 
 **Outputs:** Compelling product strategy documents for investors, executives, cross-functional teams
@@ -243,6 +258,7 @@ See `/app/skills/writing-skills/` for comprehensive guidance:
 ### Skill Conventions
 
 All skills:
+
 - Have a `SKILL.md` file with YAML frontmatter (name, description)
 - Include clear "When to Use" sections
 - May include supporting files (examples/, references/, scripts/)
@@ -270,13 +286,15 @@ volumes:
 File: `crush/crush.json`
 
 **LSP Settings:**
+
 - Go: `gopls` with `GOTOOLCHAIN=go1.25.5`
 
 **Options:**
+
 - Attribution: `trailer_style: none`, `generated_with: false`
 - No "Generated with" footers in AI-generated content
 
-## Important Patterns & Gotcas
+## Important Patterns & Gotchas
 
 ### Bash Profile
 
@@ -342,6 +360,7 @@ PATH includes:
 Expected structure: `~/workspace/OWNER/REPO/`
 
 Example:
+
 ```
 ~/workspace/
 ├── ryanmoran/
@@ -367,6 +386,7 @@ The `pull.sh` script assumes this 3-level depth for discovery.
 ### Testing Installation
 
 The `reinstall` function:
+
 - Checks for uncommitted changes (blocks if found)
 - Pulls latest from remote
 - Re-runs `install.sh`
@@ -384,6 +404,7 @@ Follow the **writing-skills** skill pattern:
 5. Add supporting files as needed (examples/, references/, scripts/)
 
 Skills should be:
+
 - Reusable across projects
 - Technique-focused (not narrative)
 - Tested with pressure scenarios
