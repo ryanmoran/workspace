@@ -12,7 +12,7 @@ return {
 			javascriptreact = { "eslint_d" },
 			json = { "jsonlint" },
 			lua = { "luacheck" },
-			markdown = { "markdownlint" },
+			markdown = { "rumdl" },
 			sh = { "shellcheck" },
 			typescript = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
@@ -37,12 +37,6 @@ return {
 		lint.linters.yamllint.args = {
 			"-c",
 			"~/.config/nvim/.yamllint",
-		}
-
-		lint.linters.markdownlint.args = {
-			"--stdin",
-			"--disable",
-			"MD024",
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

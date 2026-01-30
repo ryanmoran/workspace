@@ -1,7 +1,7 @@
 return {
-	"williamboman/mason.nvim",
+	"mason-org/mason.nvim",
 	dependencies = {
-		{ "williamboman/mason-lspconfig.nvim" },
+		{ "mason-org/mason-lspconfig.nvim" },
 		{ "neovim/nvim-lspconfig" },
 		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 	},
@@ -32,7 +32,7 @@ return {
 				"gopls",
 				"jsonlint",
 				"luacheck",
-				"markdownlint",
+				"rumdl",
 				"prettier",
 				"shellcheck",
 				"shfmt",

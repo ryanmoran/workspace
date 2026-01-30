@@ -1,11 +1,9 @@
 {
   "$schema": "https://charm.land/crush.json",
   "lsp": {
-    "go": {
-      "command": "gopls",
-      "env": {
-        "GOTOOLCHAIN": "go1.25.6"
-      }
+    "markdown": {
+      "command": "rumdl",
+      "args": ["server", "--stdio"]
     }
   },
   "options": {

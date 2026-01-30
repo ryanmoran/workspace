@@ -55,14 +55,14 @@ Explain the business and technical context. Why are we building this now?
 
 ## RACI Table
 
-<!-- markdownlint-disable MD013 -->
+<!-- rumdl-disable MD013 -->
 
 | Aspect / Goal              | Responsible (R) | Accountable (A) | Consulted (C)      | Informed (I)      |
 | -------------------------- | --------------- | --------------- | ------------------ | ----------------- |
 | Goal 1 or technical aspect | @person         | @person         | @person1, @person2 | Team, Stakeholder |
 | Goal 2 or technical aspect | @person         | @person         | @person1, @person2 | Team, Stakeholder |
 
-<!-- markdownlint-enable MD013 -->
+<!-- rumdl-enable MD013 -->
 
 ## Proposal
 
@@ -264,7 +264,7 @@ Identify potential issues and mitigation strategies:
 
 ## Milestones & Timeline
 
-<!-- markdownlint-disable MD013 -->
+<!-- rumdl-disable MD013 -->
 
 | Milestone & Features         | Phase       | Estimates | Timeline | Dependencies          |
 | ---------------------------- | ----------- | --------- | -------- | --------------------- |
@@ -274,6 +274,6 @@ Identify potential issues and mitigation strategies:
 | Testing & QA                 | Rollout     | 1 week    | Week 5   | All features complete |
 | Production rollout           | Rollout     | 0.5 weeks | Week 6   | QA signoff            |
 
-<!-- markdownlint-enable MD013 -->
+<!-- rumdl-enable MD013 -->
 
 **Total Estimate:** ~6 weeks
