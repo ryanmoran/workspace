@@ -278,3 +278,27 @@ type Cache[T any] struct {
     data map[string]T
 }
 ```
+
+### Parameter Naming
+
+Omit the names of parameters when they are intelligible without names.
+Naming the parameters is really only useful when the purpose of a parameter
+cannot be inferred from its type. This is often the case when using builtin
+types.
+
+**Correct (builtin types):**
+
+```go
+type LineReader interface {
+    Read(data []byte) (lines []string, err error)
+}
+```
+
+**Incorrect:**
+
+```go
+// Names don't provide any more clarity about the parameters than their type does
+type LineReader interface {
+    Read(reader io.Reader) (buffer *bytes.Buffer, err error)
+}
+```
