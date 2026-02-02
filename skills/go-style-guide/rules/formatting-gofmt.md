@@ -14,11 +14,12 @@ universal consistency across all Go projects.
 every Go codebase looks familiar to every Go programmer. This dramatically
 reduces cognitive load and review friction.
 
-**Setup:**
+**For LLM agents:**
 
-- Configure your editor to run `gofmt` on save
-- Most editors have built-in support or plugins
-- Some teams use `gofmt` as a pre-commit hook
+- Always format code using `gofmt` before presenting it
+- Run `gofmt -w <file>` to format Go files in place
+- Ensure all generated code conforms to `gofmt` standards
+- You can verify formatting with `gofmt -d <file>` (shows diff if not formatted)
 
 **Incorrect (manually formatted):**
 

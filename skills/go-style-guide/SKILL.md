@@ -1,6 +1,6 @@
 ---
 name: go-style-guide
-description: Google Go Style Guide for writing clear, idiomatic, and maintainable Go code. Use this skill when writing, reviewing, or refactoring Go code to ensure adherence to Google's best practices. Triggers on tasks involving Go packages, functions, error handling, testing, naming, or performance optimization.
+description: Google Go Style Guide for writing clear, idiomatic, and maintainable Go code. Use this skill when writing, reviewing, or refactoring Go code to ensure adherence to Google's best practices. Triggers on tasks involving Go packages, functions, error handling, naming, or performance optimization.
 ---
 
 # Google Go Style Guide
@@ -17,7 +17,7 @@ Reference these guidelines when:
 - Reviewing Go code for style and idiom compliance
 - Refactoring existing Go codebases
 - Designing APIs and package interfaces
-- Handling errors or writing tests
+- Handling errors
 - Making naming or formatting decisions
 
 ## Core Principles (In Priority Order)
@@ -42,8 +42,6 @@ When style choices conflict, prioritize based on this ordering.
 | Error Handling     | HIGH     | Explicit, idiomatic patterns       | `error-handling-basics.md`    |
 | Custom Errors      | MEDIUM   | Sentinel errors, custom types      | `error-handling-custom.md`    |
 | Package Design     | HIGH     | Minimal dependencies, focused      | `package-design.md`           |
-| Testing Patterns   | HIGH     | Table-driven, comprehensive        | `testing-table-driven.md`     |
-| Test Quality       | MEDIUM   | Clear failures, test helpers       | `testing-quality.md`          |
 | Documentation      | MEDIUM   | Explain "why", not "what"          | `documentation.md`            |
 | Interfaces         | MEDIUM   | Use sparingly, clear contracts     | `interface-design.md`         |
 | Concurrency        | MEDIUM   | Idiomatic channels/goroutines      | `concurrency.md`              |

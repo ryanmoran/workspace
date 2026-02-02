@@ -19,9 +19,8 @@ everything.
 
 ```text
 myapp/
-  cmd/              # Command-line applications
-    myapp/
-      main.go
+  main.go           # Command-line application (can be at root)
+  handler.go        # Public library code (can be at root)
   internal/         # Private application code
     auth/           # Authentication logic
       token.go
@@ -32,17 +31,16 @@ myapp/
     api/            # HTTP handlers
       users.go
       posts.go
-  pkg/              # Public library code
-    client/         # Client library for external use
-      client.go
 ```
 
 **Key principles:**
 
+- Command-line applications can be at the root directory (no `cmd/` needed)
+- Public library code can be at the root directory (no `pkg/` needed)
 - Each package has clear, non-overlapping responsibility
 - `internal/` for private application code
-- `pkg/` for reusable library code
-- `cmd/` for application entry points
+- Use `cmd/` only when you have multiple command-line applications
+- Use `pkg/` only when you need to clearly separate public API from private code
 
 **Incorrect:**
 
