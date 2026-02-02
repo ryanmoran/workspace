@@ -1,0 +1,18 @@
+# rumdl configuration file
+
+[global]
+
+exclude = [
+    ".git",
+    ".github",
+]
+
+respect-gitignore = true
+
+flavor = "gfm"
+
+[MD013]
+line-length = 150  # Line length
+code-blocks = false  # Exclude code blocks from line length check
+tables = false  # Exclude tables from line length check
+headings = true  # Include headings in line length check
