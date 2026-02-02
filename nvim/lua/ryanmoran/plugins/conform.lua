@@ -14,7 +14,7 @@ return {
 				javascriptreact = { "prettier" },
 				json = { "prettier" },
 				lua = { "stylua" },
-				markdown = { "prettier" },
+				markdown = { "rumdl" },
 				sh = { "shfmt" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
