@@ -11,24 +11,15 @@ directory.
 
 The skill is based upon the lessons of the [Google Go Styleguide](https://google.github.io/styleguide/go/).
 
-The skill is structured as a single SKILL.md file, but I would like to redesign
-it in keeping with the ideas of progressive disclosure.
+I'd like to make the following changes:
 
-You can read about progressive disclosure in [Anthropic's blog post](https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills).
-
-As far as the structure of the skill, the [Vercel React Best Practices](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices)
-skill is a good example.
-
-The thing I think is good about the Vercel skill is that the top-level SKILL.md
-document is just a directory for find the rules that outline the best practices.
-The actual content is stored in smaller files elsewhere. This means that agents
-will spend more time doing lookup to find what they need, but also load less
-extra context that they don't. This is preferred so that we can reduce the
-overall number of tokens loaded into the context window.
-
-Redesign the existing skill with this in mind.
-
-Also, use `rumdl` to format any markdown files.
+1. Don't reference editors or IDEs. Assume that the audience for this is an LLM
+   coding agent which doesn't use those. If the content of the reference is
+   important, describe how an LLM agent would achieve the same outcome.
+2. The package design rule should have the following changes:
+   - command-line applications can just be at the root directory, they don't need to be under a `cmd` directory
+   - public library code can also just be at the root, they don't need to be under a `pkg` directory
+3. Remove the specific rules related to testing
 
 ## On Successful Completion of the Objective
 
