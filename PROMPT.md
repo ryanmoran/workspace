@@ -6,24 +6,13 @@
 
 ## Objective
 
-Let's develop a new skill for writing a Technical Design Document (TDD).
+Let's develop a new skill for Go coding style.
 
-There are 3 example TDDs mounted at the following locations:
+Read the [Google Go Styleguide](https://google.github.io/styleguide/go/) and distill its lessons into a skill
+using progressive disclosure.
 
-- /tdd-1
-- /tdd-2
-- /tdd-3
-
-Read these and use them as a mechanism for understanding how technical design
-documents should be written.
-
-TDDs have a common format they follow. As part of the skill, distill a common
-template that can be used when writing a new TDD.
-
-Model this new skill on the existing `brainstorming` skill. This skill is a
-great example of how to interactively develop ideas with a user. It is
-desirable that this new skill describe an interactive process with the user and
-agent working together to develop the TDD.
+As far as the structure of the skill, the [Vercel React Best Practices](https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices)
+skill is a good example.
 
 ## On Successful Completion of the Objective
 
