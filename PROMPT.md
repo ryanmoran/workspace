@@ -6,25 +6,15 @@
 
 ## Objective
 
-We're in the process of developing a new skill in the ./skills/testing
-directory.
+Let's develop a skill for performing code review.
 
-The skill is structured as a single SKILL.md file, but I would like to redesign
-it in keeping with the ideas of progressive disclosure.
+Spend some time researching the following:
 
-You can read about progressive disclosure in [Anthropic's blog post](https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills).
+- [How to do a code review](https://google.github.io/eng-practices/review/reviewer/) according to Google
+- [Ways to Make Code Reviews More Effective](https://www.infoq.com/articles/effective-code-reviews/)
+- [Code Review Best Practices](https://blog.palantir.com/code-review-best-practices-19e02780015f) according to Palantir
 
-As far as the structure of the skill, the ./skills/go-style-guide skill is a
-good example.
-
-The thing I think is good about the Go Style Guide skill is that the top-level
-SKILL.md document is just a directory for find the rules that outline the best
-practices. The actual content is stored in smaller files elsewhere. This means
-that agents will spend more time doing lookup to find what they need, but also
-load less extra context that they don't. This is preferred so that we can reduce
-the overall number of tokens loaded into the context window.
-
-Redesign the existing skill with this in mind.
+Then, let's brainstorm what we want out of a skill helps an agent perform code review.
 
 ## On Successful Completion of the Objective
 
