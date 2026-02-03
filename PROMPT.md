@@ -6,15 +6,20 @@
 
 ## Objective
 
-Let's develop a skill for performing code review.
+Let's develop a skill for refactoring legacy codebases.
 
 Spend some time researching the following:
 
-- [How to do a code review](https://google.github.io/eng-practices/review/reviewer/) according to Google
-- [Ways to Make Code Reviews More Effective](https://www.infoq.com/articles/effective-code-reviews/)
-- [Code Review Best Practices](https://blog.palantir.com/code-review-best-practices-19e02780015f) according to Palantir
+- [Testing legacy Go code](https://bitfieldconsulting.com/posts/testing-legacy-code)
+- [Complete Guid on Refactoring Legacy Code Without Breaking Anything](https://kodesage.ai/blog/refactoring-legacy-code)
+- [Rule of three](https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming))
+- [4 tips to refactor a complex legacy app without automation tools](https://understandlegacycode.com/blog/4-tips-refactor-without-tools/)
+- [Code Smells](https://refactoring.guru/refactoring/smells)
+- [Refactoring Techniques](https://refactoring.guru/refactoring/techniques)
+- [Legacy Code Refactoring](https://www.docuwriter.ai/posts/legacy-code-refactoring)
+- [Code Refactoring](https://www.codesee.io/learning-center/code-refactoring)
 
-Then, let's brainstorm what we want out of a skill helps an agent perform code review.
+Then, let's brainstorm what we want out of a skill helps an agent refactor a legacy codebase.
 
 ## On Successful Completion of the Objective
 
