@@ -233,6 +233,53 @@ Based on industry best practices from Google, InfoQ, and Palantir:
    - Tests cover edge cases
    - Error paths tested
 
+#### 3.5 Code Smells Analysis (apply refactoring skill)
+
+**Systematically evaluate code for common smells from refactoring skill:**
+
+1. **Check for Bloaters** (code grown too large)
+   - **Long Method**: Functions >20-30 lines doing multiple things
+   - **Large Class**: Classes >200-300 lines with multiple responsibilities
+   - **Long Parameter List**: Functions with >3-4 parameters
+   - **Primitive Obsession**: Using primitives instead of domain objects
+   - **Data Clumps**: Same variables appearing together repeatedly
+
+2. **Check for Object-Orientation Abusers**
+   - **Switch Statements**: Complex switch/case chains based on type codes
+   - **Temporary Field**: Fields only used in certain circumstances
+   - **Refused Bequest**: Subclasses using only fraction of inherited methods
+
+3. **Check for Change Preventers**
+   - **Divergent Change**: Class commonly changed for different reasons
+   - **Shotgun Surgery**: Single change requires edits across many classes
+   - **Parallel Inheritance Hierarchies**: Adding subclass requires changes elsewhere
+
+4. **Check for Dispensables** (unnecessary code)
+   - **Duplicate Code**: Same structure in multiple places (Rule of 3)
+   - **Dead Code**: Unused functions, variables, parameters (use `lsp_references`)
+   - **Speculative Generality**: Unused abstractions "for future use"
+   - **Lazy Class**: Class doing too little to justify existence
+   - **Comments**: Excessive comments explaining bad code
+
+5. **Check for Couplers** (excessive dependencies)
+   - **Feature Envy**: Method uses data from another class more than its own
+   - **Inappropriate Intimacy**: Classes too coupled to each other's internals
+   - **Message Chains**: a.getB().getC().doSomething() chains
+   - **Middle Man**: Class just delegates to another class
+
+**Reference documentation:**
+
+- See `refactoring/references/code-smells-catalog.md` for detailed descriptions
+- See `refactoring/SKILL.md` for refactoring guidance
+- Use `lsp_references` to verify dead code
+- Look for patterns across changed files
+
+**Severity guidelines:**
+
+- **BLOCKING**: Dead code that confuses, duplicate code causing bugs, extremely long methods (>100 lines)
+- **SUGGESTED**: Most code smells (long methods, large classes, feature envy, data clumps)
+- **NITS**: Minor duplication (only 2 instances), slight parameter list issues (4 params)
+
 ### Phase 4: VERIFY
 
 **Objective**: Run automated checks and tests
@@ -316,6 +363,16 @@ Generate a comprehensive review report following this format:
   <Description of improvement>
   See: <reference to docs/rules>
   Consider: <alternative approach>
+
+### CODE SMELLS 👃
+
+<Refactoring opportunities identified>
+
+- **<Smell type>** (<file>:<line>)
+  <Description of the smell>
+  Impact: <Why this matters>
+  See: refactoring/references/code-smells-catalog.md
+  Refactor: <Suggested technique from refactoring skill>
 
 ### NITS 🔍
 
@@ -549,6 +606,38 @@ Example feedback:
   Domain layer test using real database instead of mocks
   See: testing/rules/unit-tests.md
   Consider: Use counterfeiter to generate mocks for UserStore interface
+```
+
+### refactoring Skill
+
+When identifying code smells, reference the refactoring skill:
+
+- `refactoring/references/code-smells-catalog.md` - Comprehensive smell catalog
+- `refactoring/references/refactoring-techniques.md` - How to fix each smell
+- `refactoring/SKILL.md` - Safety-first refactoring approach
+
+Example feedback:
+
+```markdown
+### CODE SMELLS 👃
+
+- **Long Method** (pkg/orders/processor.go:45)
+  ProcessOrder function is 87 lines doing validation, calculation, and persistence
+  Impact: Hard to test, understand, and reuse individual pieces
+  See: refactoring/references/code-smells-catalog.md#long-method
+  Refactor: Extract Method - separate into validateOrder, calculateTotal, and saveOrder
+
+- **Feature Envy** (pkg/invoice/calculator.go:23)
+  CalculateTotal uses only Order's data, none of Calculator's fields
+  Impact: Method is in wrong place, increases coupling
+  See: refactoring/references/code-smells-catalog.md#feature-envy
+  Refactor: Move Method to Order class where data lives
+
+- **Duplicate Code** (pkg/users/service.go:45, pkg/users/handler.go:78, pkg/admin/service.go:102)
+  Email validation logic appears 3+ times with slight variations
+  Impact: Bug fixes must be applied in multiple places, inconsistent behavior
+  See: refactoring/references/code-smells-catalog.md#duplicate-code
+  Refactor: Extract Method into shared validation package
 ```
 
 ## Quick Reference
