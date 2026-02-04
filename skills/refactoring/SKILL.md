@@ -32,7 +32,7 @@ Use this skill when:
 
 ### Phase 1: Understand & Assess
 
-Before touching any code, invest time understanding what you're working with.
+Before touching any code, invest time understanding what you're working with. **This phase ends with explaining your plan to the user and getting approval before implementation.**
 
 #### 1.1 Exploration (Time Box: 30 minutes)
 
@@ -104,6 +104,61 @@ Answer these questions before proceeding:
    - What's the maintenance cost of NOT refactoring?
 
 **DECISION POINT:** If no clear justification exists, STOP. Document why refactoring isn't needed and move on.
+
+#### 1.4 Explain Refactoring Plan & Get Approval
+
+Before proceeding to implementation, present your refactoring plan to the user:
+
+**Structure your explanation:**
+
+1. **Code Smells Identified:**
+   - List the specific smells found (e.g., "Long Method in ProcessOrder (185 lines)")
+   - Indicate severity and impact on maintainability
+
+2. **Proposed Refactoring Approach:**
+   - Which techniques you'll apply (e.g., "Extract Method for validation, calculation, and persistence")
+   - Order of operations (which refactorings first)
+   - Expected intermediate states
+
+3. **Testing Strategy:**
+   - How you'll build the safety net (characterization tests, test islands, etc.)
+   - Estimated test coverage before refactoring begins
+
+4. **Estimated Scope:**
+   - How many files/functions will be affected
+   - Approximate time to complete (based on Phase 1 exploration)
+   - Whether this is incremental (partial) or complete refactoring
+
+**Format:**
+
+```markdown
+## Refactoring Plan
+
+### Code Smells Found
+- [List specific smells with locations]
+
+### Proposed Changes
+- [Describe refactoring techniques to apply]
+- [Show order of operations]
+
+### Testing Strategy
+- [Explain how safety net will be built]
+
+### Scope & Effort
+- Files affected: X
+- Estimated time: Y hours
+- Approach: [Incremental/Complete]
+
+### Risks & Mitigations
+- [Any concerns about the refactoring]
+- [How you'll handle them]
+```
+
+**CRITICAL: STOP and ask for user approval before proceeding to Phase 2.**
+
+Say: "Should I proceed with this refactoring plan?"
+
+Wait for user confirmation before continuing to Phase 2.
 
 ### Phase 2: Build Safety Net
 
@@ -591,6 +646,10 @@ Need to change code?
 │  ├─ No → Document why, move on
 │  └─ Yes → Continue
 │
+├─ Explain plan to user and get approval
+│  ├─ No approval → Stop
+│  └─ Approved → Continue
+│
 ├─ Tests exist?
 │  ├─ No → Phase 2: Build safety net (characterization tests)
 │  └─ Yes → Continue
@@ -604,7 +663,7 @@ Need to change code?
 
 ### Time Estimates
 
-- **Phase 1 (Explore):** 30-60 minutes
+- **Phase 1 (Explore & Plan):** 30-60 minutes (includes explaining plan to user)
 - **Phase 2 (Safety Net):** 1-3 hours (depends on complexity)
 - **Phase 3 (Refactor):** 2-8 hours (depends on scope)
 - **Phase 4 (Validate):** 15-30 minutes
