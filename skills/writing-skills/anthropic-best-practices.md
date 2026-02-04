@@ -254,7 +254,7 @@ As your Skill grows, you can bundle additional content that Claude loads only wh
 
 The complete Skill directory structure might look like this:
 
-```
+```text
 pdf/
 ├── SKILL.md              # Main instructions (loaded when triggered)
 ├── FORMS.md              # Form-filling guide (loaded as needed)
@@ -299,7 +299,7 @@ Claude loads FORMS.md, REFERENCE.md, or EXAMPLES.md only when needed.
 
 For Skills with multiple domains, organize content by domain to avoid loading irrelevant context. When a user asks about sales metrics, Claude only needs to read sales-related schemas, not finance or marketing data. This keeps token usage low and context focused.
 
-```
+```text
 bigquery-skill/
 ├── SKILL.md (overview and navigation)
 └── reference/
@@ -364,11 +364,11 @@ Claude may partially read files when they're referenced from other referenced fi
 
 See [advanced.md](advanced.md)...
 
-# advanced.md
+## advanced.md
 
 See [details.md](details.md)...
 
-# details.md
+## details.md
 
 Here's the actual information...
 ```
@@ -427,7 +427,7 @@ Break complex operations into clear, sequential steps. For particularly complex 
 
 Copy this checklist and track your progress:
 
-```
+```text
 Research Progress:
 - [ ] Step 1: Read all source documents
 - [ ] Step 2: Identify key themes
@@ -470,7 +470,7 @@ This example shows how workflows apply to analysis tasks that don't require code
 
 Copy this checklist and check off items as you complete them:
 
-```
+```text
 Task Progress:
 - [ ] Step 1: Analyze the form (run analyze_form.py)
 - [ ] Step 2: Create field mapping (edit fields.json)
@@ -676,7 +676,7 @@ Generate commit messages following these examples:
 Input: Added user authentication with JWT tokens
 Output:
 
-```
+```text
 feat(auth): implement JWT-based authentication
 
 Add login endpoint and token validation middleware
@@ -686,7 +686,7 @@ Add login endpoint and token validation middleware
 Input: Fixed bug where dates displayed incorrectly in reports
 Output:
 
-```
+```text
 fix(reports): correct date formatting in timezone conversion
 
 Use UTC timestamps consistently across report generation
@@ -696,7 +696,7 @@ Use UTC timestamps consistently across report generation
 Input: Updated dependencies and refactored error handling
 Output:
 
-```
+```text
 chore: update dependencies and refactor error handling
 
 - Upgrade lodash to 4.17.21
@@ -1058,7 +1058,7 @@ Skills run in a code execution environment with filesystem access, bash commands
 
 **Example:**
 
-```
+```text
 bigquery-skill/
 ├── SKILL.md (overview, points to reference files)
 └── reference/
@@ -1109,7 +1109,9 @@ from pypdf import PdfReader
 reader = PdfReader("file.pdf")
 ```"
 ````
-````
+
+
+````text
 
 ## Technical notes
 

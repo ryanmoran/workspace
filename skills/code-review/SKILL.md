@@ -282,6 +282,7 @@ Generate a comprehensive review report following this format:
 # Code Review: <branch-name>
 
 ## Summary
+
 - Base branch: <base>
 - Commits: <count>
 - Files changed: <X> added, <Y> modified, <Z> deleted
@@ -290,14 +291,16 @@ Generate a comprehensive review report following this format:
 - Inferred purpose: <based on commits and changes>
 
 ## Architecture Compliance
+
 <Status of architectural alignment>
 ✅ Follows documented architecture patterns
 ✅ Dependencies flow in correct direction
-⚠️  <Any concerns or missing pieces>
+⚠️ <Any concerns or missing pieces>
 
 ## Findings
 
 ### BLOCKING ⛔
+
 <Issues that must be fixed before merge>
 
 - **<Issue title>** (<file>:<line>)
@@ -306,6 +309,7 @@ Generate a comprehensive review report following this format:
   Fix: <specific actionable fix>
 
 ### SUGGESTED 💡
+
 <Improvements that should be considered>
 
 - **<Suggestion title>** (<file>:<line>)
@@ -314,6 +318,7 @@ Generate a comprehensive review report following this format:
   Consider: <alternative approach>
 
 ### NITS 🔍
+
 <Minor style/convention issues>
 
 - **<Nit title>** (<file>:<line>)
@@ -321,6 +326,7 @@ Generate a comprehensive review report following this format:
   See: <reference to style guide>
 
 ### POSITIVE ✅
+
 <Things done well - be specific>
 
 - <Specific positive callout>
@@ -328,6 +334,7 @@ Generate a comprehensive review report following this format:
 - <Well-tested scenario>
 
 ## Test Verification
+
 - [ ] Tests exist for new functionality
 - [ ] All tests pass
 - [ ] Edge cases covered
@@ -336,6 +343,7 @@ Generate a comprehensive review report following this format:
 - [ ] Using `require` for assertions
 
 ## Overall Recommendation
+
 <APPROVE | REQUEST_CHANGES | COMMENT>
 
 <Brief explanation of decision with reasoning>
@@ -514,6 +522,7 @@ Example feedback:
 
 ```markdown
 ### BLOCKING ⛔
+
 - **Error handling violation** (pkg/users/service.go:45)
   Errors not wrapped with context, making debugging difficult
   See: go-style-guide/rules/error-handling-basics.md
@@ -535,6 +544,7 @@ Example feedback:
 
 ```markdown
 ### SUGGESTED 💡
+
 - **Test type mismatch** (pkg/users/service_test.go:15)
   Domain layer test using real database instead of mocks
   See: testing/rules/unit-tests.md

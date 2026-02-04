@@ -1,26 +1,28 @@
 ---
-name: legacy-refactoring
-description: "Use when refactoring existing code that lacks tests, has unclear structure, or shows code smells. Applies safety-first, incremental refactoring to legacy codebases without breaking functionality."
+name: refactoring
+description: "Use when refactoring existing code that lacks tests, has unclear structure, or shows code smells. Applies safety-first, incremental refactoring to codebases without breaking functionality."
 ---
 
-# Legacy Code Refactoring
+# Code Refactoring
 
 ## Overview
 
-This skill provides a disciplined, safety-first approach to refactoring code you didn't write and may not fully understand. Unlike greenfield development where you can be bold, legacy refactoring requires caution, testing, and incremental progress.
+This skill provides a disciplined, safety-first approach to refactoring code you didn't write and may not fully understand. Unlike greenfield development where you can be bold, refactoring requires caution, testing, and incremental progress.
 
 **Core Principle:** Never refactor without a safety net. Always work in small, testable steps.
 
 ## When to Use This Skill
 
 Use this skill when:
+
 - Refactoring code without adequate test coverage
 - Working with unfamiliar or poorly documented code
 - Code shows clear code smells (duplication, complexity, coupling)
-- Preparing legacy code for new features or bug fixes
+- Preparing code for new features or bug fixes
 - Code is frequently modified and causing problems
 
 **Do NOT use this skill for:**
+
 - New code you're currently writing (use TDD skill instead)
 - Code with comprehensive test coverage (standard refactoring is fine)
 - Trivial changes (renaming variables, fixing typos)
@@ -35,6 +37,7 @@ Before touching any code, invest time understanding what you're working with.
 #### 1.1 Exploration (Time Box: 30 minutes)
 
 **Map the territory:**
+
 - Read the code thoroughly
 - Trace execution paths from entry points
 - Identify dependencies (imports, global state, database calls)
@@ -42,6 +45,7 @@ Before touching any code, invest time understanding what you're working with.
 - Document areas of confusion
 
 **Tools to use:**
+
 - `lsp_references` - Find where functions/types are used
 - `grep` - Search for patterns across the codebase
 - `git log` and `git blame` - Understand change history
@@ -52,6 +56,7 @@ Before touching any code, invest time understanding what you're working with.
 Systematically check for these categories:
 
 **Bloaters** (code grown too large):
+
 - Long Method (>20-30 lines)
 - Large Class (>200-300 lines, multiple responsibilities)
 - Long Parameter List (>3-4 parameters)
@@ -59,17 +64,20 @@ Systematically check for these categories:
 - Data Clumps (same group of variables appearing together)
 
 **Change Preventers** (changes require many edits):
+
 - Shotgun Surgery (one change requires edits across many files)
 - Divergent Change (one class changes for different reasons)
 - Parallel Inheritance Hierarchies (adding subclass requires changes elsewhere)
 
 **Dispensables** (unnecessary code):
+
 - Duplicate Code (same structure in multiple places)
 - Dead Code (unused functions, variables, parameters)
 - Speculative Generality (unused abstractions "for future use")
 - Lazy Class (class doing too little to justify existence)
 
 **Couplers** (excessive dependencies):
+
 - Feature Envy (method uses data from another class more than its own)
 - Inappropriate Intimacy (classes too coupled to each other's internals)
 - Message Chains (a.getB().getC().doSomething())
@@ -111,18 +119,19 @@ Document current behavior as-is (bugs and all):
 
 ```go
 // Characterization test - documents existing behavior
-func TestLegacyFunction_ExistingBehavior(t *testing.T) {
+func TestFunction_ExistingBehavior(t *testing.T) {
     // Input -> Output mapping
-    result := LegacyFunction("input")
+    result := Function("input")
     require.Equal(t, "observed output", result)
-    
+
     // Edge cases (even if they seem wrong)
-    result = LegacyFunction("")
+    result = Function("")
     require.Equal(t, "weird behavior", result) // TODO: fix in future
 }
 ```
 
 **Key points:**
+
 - Capture what the code DOES, not what it SHOULD do
 - Test edge cases and error paths
 - Mark known bugs with TODO comments
@@ -135,11 +144,11 @@ For complex outputs (JSON, HTML, reports):
 ```go
 func TestComplexFunction_ApprovalTest(t *testing.T) {
     result := ComplexFunction(input)
-    
+
     // First run: capture the output as baseline
     // Subsequent runs: compare against baseline
     goldenFile := "testdata/complex_function.golden"
-    
+
     // Compare result with golden file
     // (Use library like github.com/sebdah/goldie)
 }
@@ -150,6 +159,7 @@ func TestComplexFunction_ApprovalTest(t *testing.T) {
 When code is too tangled to test:
 
 1. **Extract small testable function:**
+
    ```go
    // Before: large untestable function
    func BigUntestableFunction() {
@@ -157,12 +167,12 @@ When code is too tangled to test:
        x := someCalculation()
        // more tangled code
    }
-   
+
    // After: extract testable piece
    func CalculateValue(input int) int {
        return input * 2 + 10
    }
-   
+
    func BigUntestableFunction() {
        // 198 lines of tangled code
        x := CalculateValue(5)
@@ -171,6 +181,7 @@ When code is too tangled to test:
    ```
 
 2. **Test the extracted function:**
+
    ```go
    func TestCalculateValue(t *testing.T) {
        require.Equal(t, 20, CalculateValue(5))
@@ -185,12 +196,14 @@ For truly impossible-to-test functions:
 
 1. **Ignore the old function** - don't try to test it
 2. **Write test for function you WISH existed:**
+
    ```go
    func TestNewCleanFunction(t *testing.T) {
        result := NewCleanFunction(input)
        require.Equal(t, expected, result)
    }
    ```
+
 3. **Implement new function** that passes the test
 4. **Replace all call sites** (search and replace)
 5. **Delete old function**
@@ -223,6 +236,7 @@ Each cycle takes 5-15 minutes:
 6. **Repeat**
 
 **Critical rules:**
+
 - Only one technique per cycle
 - Keep tests green at all times
 - Commit after every successful change
@@ -250,7 +264,7 @@ Choose the appropriate technique for each smell:
        // persistence
        db.Save(order)
    }
-   
+
    // After
    func ProcessOrder(order Order) {
        if err := validateOrder(order); err != nil { return err }
@@ -292,10 +306,11 @@ Choose the appropriate technique for each smell:
 **For Long Parameter List:**
 
 1. **Introduce Parameter Object** (primary)
+
    ```go
    // Before
    func CreateUser(name, email, phone, address, city, state, zip string) {}
-   
+
    // After
    type UserInfo struct {
        Name, Email, Phone string
@@ -316,6 +331,7 @@ Choose the appropriate technique for each smell:
 **For Switch Statements:**
 
 1. **Replace Conditional with Polymorphism** (primary)
+
    ```go
    // Before
    func GetPrice(product Product) float64 {
@@ -325,15 +341,15 @@ Choose the appropriate technique for each smell:
        default: return product.BasePrice
        }
    }
-   
+
    // After (interface + implementations)
    type Pricer interface {
        GetPrice() float64
    }
-   
+
    type Book struct { BasePrice float64 }
    func (b Book) GetPrice() float64 { return b.BasePrice * 0.9 }
-   
+
    type Electronics struct { BasePrice float64 }
    func (e Electronics) GetPrice() float64 { return e.BasePrice * 1.1 }
    ```
@@ -343,22 +359,23 @@ Choose the appropriate technique for each smell:
 **For Primitive Obsession:**
 
 1. **Replace Data Value with Object** (primary)
+
    ```go
    // Before
    type Order struct {
        PhoneNumber string // "555-1234"
    }
-   
+
    // After
    type PhoneNumber struct {
        CountryCode string
        AreaCode    string
        Number      string
    }
-   
+
    func (p PhoneNumber) Format() string { /* ... */ }
    func (p PhoneNumber) Validate() error { /* ... */ }
-   
+
    type Order struct {
        Phone PhoneNumber
    }
@@ -374,10 +391,11 @@ Choose the appropriate technique for each smell:
 **For Message Chains:**
 
 1. **Hide Delegate**
+
    ```go
    // Before
    manager := employee.GetDepartment().GetManager()
-   
+
    // After (add method to Employee)
    func (e Employee) GetManager() Manager {
        return e.department.manager
@@ -416,6 +434,7 @@ and testability. No behavior change - all tests pass."
 ```
 
 **Commit message format:**
+
 - Start with `refactor:`
 - Describe WHAT was changed
 - Explain WHY briefly
@@ -524,7 +543,7 @@ Stop refactoring when:
 
 ## Ship of Theseus: When to Replace Instead of Refactor
 
-For massive legacy code that resists refactoring:
+For massive code that resists refactoring:
 
 ### Signs You Need Replacement
 
@@ -543,6 +562,7 @@ For massive legacy code that resists refactoring:
 6. **Remove old code** once fully migrated
 
 **Benefits:**
+
 - Incremental migration (lower risk)
 - Can rollback feature-by-feature
 - Continuous delivery throughout process
@@ -552,8 +572,8 @@ For massive legacy code that resists refactoring:
 
 ### Decision Tree
 
-```
-Need to change legacy code?
+```text
+Need to change code?
 │
 ├─ Code has good tests?
 │  ├─ Yes → Standard refactoring (not this skill)
@@ -600,7 +620,7 @@ Need to change legacy code?
 3. **Refactor:** Gradually extract more functions, each tested
 4. **Result:** Network of small, tested functions replacing monolith
 
-### Scenario 2: "Mysterious Bug in Legacy Code"
+### Scenario 2: "Mysterious Bug in Code"
 
 1. **DON'T refactor yet** - fix bug first
 2. **Write test** that reproduces bug
@@ -626,13 +646,14 @@ Need to change legacy code?
 ## Resources
 
 See `references/` directory for:
+
 - `code-smells-catalog.md` - Comprehensive smell descriptions
 - `refactoring-techniques.md` - Detailed technique examples
 - `testing-strategies.md` - Test pattern examples
 
 ## Summary
 
-Legacy refactoring is about **safety, discipline, and incremental progress**:
+Refactoring is about **safety, discipline, and incremental progress**:
 
 1. **Understand first** (exploration, smell identification)
 2. **Test second** (safety net is non-negotiable)
@@ -641,4 +662,4 @@ Legacy refactoring is about **safety, discipline, and incremental progress**:
 
 Never skip phases. Never refactor without tests. Never batch changes.
 
-**The Iron Law of Legacy Refactoring:** If you don't have tests, you're not refactoring - you're just rearranging deck chairs on the Titanic.
+**The Iron Law of Refactoring:** If you don't have tests, you're not refactoring - you're just rearranging deck chairs on the Titanic.

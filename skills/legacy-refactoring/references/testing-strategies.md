@@ -43,17 +43,17 @@ Tests that describe what the code *actually does*, not what it *should do*.
 // What does this do? Let's find out with tests
 func CalculateDiscount(customer Customer, amount float64) float64 {
     discount := 0.0
-    
+
     if customer.Type == "premium" {
         discount = amount * 0.15
     } else if customer.Type == "regular" {
         discount = amount * 0.10
     }
-    
+
     if customer.YearsActive > 5 {
         discount = discount * 1.5 // Weird: multiplies discount by 1.5
     }
-    
+
     return discount
 }
 ```
@@ -63,26 +63,26 @@ func CalculateDiscount(customer Customer, amount float64) float64 {
 ```go
 func TestCalculateDiscount_PremiumCustomer(t *testing.T) {
     customer := Customer{Type: "premium", YearsActive: 2}
-    
+
     discount := CalculateDiscount(customer, 100.0)
-    
+
     // Documents actual behavior
     require.Equal(t, 15.0, discount)
 }
 
 func TestCalculateDiscount_RegularCustomer(t *testing.T) {
     customer := Customer{Type: "regular", YearsActive: 2}
-    
+
     discount := CalculateDiscount(customer, 100.0)
-    
+
     require.Equal(t, 10.0, discount)
 }
 
 func TestCalculateDiscount_LongTimeCustomer(t *testing.T) {
     customer := Customer{Type: "premium", YearsActive: 6}
-    
+
     discount := CalculateDiscount(customer, 100.0)
-    
+
     // TODO: This seems like a bug - 22.5 seems wrong
     // But this is current behavior, so we document it
     require.Equal(t, 22.5, discount)
@@ -90,9 +90,9 @@ func TestCalculateDiscount_LongTimeCustomer(t *testing.T) {
 
 func TestCalculateDiscount_UnknownType(t *testing.T) {
     customer := Customer{Type: "unknown", YearsActive: 2}
-    
+
     discount := CalculateDiscount(customer, 100.0)
-    
+
     // Documents edge case: returns 0 for unknown type
     require.Equal(t, 0.0, discount)
 }
@@ -133,20 +133,20 @@ func TestCalculateDiscount_UnknownType(t *testing.T) {
 func GenerateInvoice(order Order) string {
     // Returns complex HTML invoice
     var buf strings.Builder
-    
+
     buf.WriteString("<html><body>")
     buf.WriteString(fmt.Sprintf("<h1>Invoice #%d</h1>", order.ID))
     buf.WriteString("<table>")
-    
+
     for _, item := range order.Items {
         buf.WriteString(fmt.Sprintf("<tr><td>%s</td><td>$%.2f</td></tr>", 
             item.Name, item.Price))
     }
-    
+
     buf.WriteString("</table>")
     buf.WriteString(fmt.Sprintf("<p>Total: $%.2f</p>", order.Total))
     buf.WriteString("</body></html>")
-    
+
     return buf.String()
 }
 ```
@@ -165,9 +165,9 @@ func TestGenerateInvoice_Standard(t *testing.T) {
         },
         Total: 35.00,
     }
-    
+
     result := GenerateInvoice(order)
-    
+
     // First run: creates testdata/TestGenerateInvoice_Standard.approved.txt
     // Future runs: compares result against approved file
     approvaltests.VerifyString(t, result)
@@ -209,6 +209,7 @@ func TestGenerateInvoice_Standard(t *testing.T) {
 ### The Problem
 
 You have a 200-line function that:
+
 - Accesses global state
 - Calls database directly
 - Has side effects everywhere
@@ -230,7 +231,7 @@ You have a 200-line function that:
 func ProcessOrder(orderID int) error {
     // Global database access
     order := GlobalDB.GetOrder(orderID)
-    
+
     // Embedded calculation (can extract this!)
     tax := 0.0
     if order.State == "CA" {
@@ -240,15 +241,15 @@ func ProcessOrder(orderID int) error {
     } else {
         tax = order.Subtotal * 0.06
     }
-    
+
     total := order.Subtotal + tax + order.Shipping
-    
+
     // More global database access
     GlobalDB.UpdateOrder(orderID, total)
-    
+
     // More tangled logic...
     // ... 150 more lines ...
-    
+
     return nil
 }
 ```
@@ -280,7 +281,7 @@ func TestCalculateTax(t *testing.T) {
         {"New York", "NY", 100.0, 8.00},
         {"Other", "TX", 100.0, 6.00},
     }
-    
+
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
             result := calculateTax(tt.state, tt.subtotal)
@@ -292,14 +293,14 @@ func TestCalculateTax(t *testing.T) {
 // Original function now uses the tested island
 func ProcessOrder(orderID int) error {
     order := GlobalDB.GetOrder(orderID)
-    
+
     tax := calculateTax(order.State, order.Subtotal) // Tested!
     total := order.Subtotal + tax + order.Shipping
-    
+
     GlobalDB.UpdateOrder(orderID, total)
-    
+
     // ... rest of code ...
-    
+
     return nil
 }
 ```
@@ -342,6 +343,7 @@ func TestCalculateTotal(t *testing.T) {
 ### The Situation
 
 You have code that:
+
 - Is too tangled to extract from
 - Would take weeks to make testable
 - Needs to change NOW
@@ -385,9 +387,9 @@ func TestCalculatePrice(t *testing.T) {
         Category:   "electronics",
         IsOnSale:   true,
     }
-    
+
     price := CalculatePrice(item)
-    
+
     require.Equal(t, 90.0, price)
 }
 ```
@@ -397,23 +399,23 @@ func TestCalculatePrice(t *testing.T) {
 ```go
 func CalculatePrice(item Item) float64 {
     price := item.BasePrice
-    
+
     if item.IsOnSale {
         price = applyDiscount(price, item.Category)
     }
-    
+
     return price
 }
 
 func applyDiscount(price float64, category string) float64 {
     discountRate := 0.1 // 10% default
-    
+
     if category == "electronics" {
         discountRate = 0.1
     } else if category == "clothing" {
         discountRate = 0.2
     }
-    
+
     return price * (1 - discountRate)
 }
 ```
@@ -464,6 +466,7 @@ price := CalculatePrice(item)
 ### The Problem
 
 Code depends on things you can't control in tests:
+
 - Database
 - File system
 - Network calls
@@ -527,9 +530,9 @@ func TestGetActiveUsers(t *testing.T) {
             {ID: 2, Name: "Bob", Active: true},
         },
     }
-    
+
     users, err := GetActiveUsers(mockStore)
-    
+
     require.NoError(t, err)
     require.Len(t, users, 2)
 }
@@ -578,9 +581,9 @@ func TestIsExpired(t *testing.T) {
         current: time.Date(2024, 1, 15, 0, 0, 0, 0, time.UTC),
     }
     expiryDate := time.Date(2024, 1, 10, 0, 0, 0, 0, time.UTC)
-    
+
     result := IsExpired(expiryDate, fakeClock)
-    
+
     require.True(t, result)
 }
 ```
@@ -601,6 +604,7 @@ func TestIsExpired(t *testing.T) {
 ### What Is It?
 
 Testing at the boundary just below:
+
 - HTTP handlers (but not the HTTP layer itself)
 - CLI commands (but not the CLI parsing)
 - UI controllers (but not the UI framework)
@@ -616,7 +620,7 @@ Testing at the boundary just below:
 
 **System structure:**
 
-```
+```text
 HTTP Request → Handler → Business Logic → Database
 ```
 
@@ -627,7 +631,7 @@ HTTP Request → Handler → Business Logic → Database
 func TestCreateUser_HTTP(t *testing.T) {
     server := httptest.NewServer(handler)
     defer server.Close()
-    
+
     resp, err := http.Post(server.URL+"/users", "application/json", body)
     // Parse response, check status codes, headers, etc.
 }
@@ -639,12 +643,12 @@ func TestCreateUser_HTTP(t *testing.T) {
 // Test business logic, skip HTTP (faster)
 func TestCreateUser_Logic(t *testing.T) {
     service := NewUserService(mockDB)
-    
+
     user, err := service.CreateUser(UserInput{
         Email: "test@example.com",
         Name:  "Test User",
     })
-    
+
     require.NoError(t, err)
     require.Equal(t, "test@example.com", user.Email)
 }
@@ -672,7 +676,7 @@ Use multiple strategies together:
 
 ### Example Workflow
 
-```
+```text
 Day 1: Characterization tests for main function
 Day 2: Extract calculation logic → Test Island
 Day 3: Extract validation logic → Test Island  
@@ -687,22 +691,27 @@ Day 5: Refactor with confidence (all tests green)
 ### Don't Do This
 
 **1. Modifying code to make it testable without tests first**
+
 - Write characterization tests FIRST
 - Then refactor to improve testability
 
 **2. Testing implementation details**
+
 - Test behavior, not internals
 - Tests should survive refactoring
 
 **3. Skipping edge cases**
+
 - Legacy code often has hidden edge cases
 - Test nulls, empties, negatives, boundaries
 
 **4. Writing tests after refactoring**
+
 - Tests written after can't verify you didn't break things
 - Write tests BEFORE any changes
 
 **5. Fixing bugs while writing characterization tests**
+
 - Document bugs with TODO
 - Fix bugs in separate commit AFTER tests exist
 
@@ -724,6 +733,6 @@ Day 5: Refactor with confidence (all tests green)
 ## Resources
 
 - Working Effectively with Legacy Code (Michael Feathers)
-- https://bitfieldconsulting.com/posts/testing-legacy-code
-- https://github.com/approvals/go-approval-tests
-- https://martinfowler.com/bliki/CharacterizationTest.html
+- <https://bitfieldconsulting.com/posts/testing-legacy-code>
+- <https://github.com/approvals/go-approval-tests>
+- <https://martinfowler.com/bliki/CharacterizationTest.html>

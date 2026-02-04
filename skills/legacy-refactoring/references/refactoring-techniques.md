@@ -24,6 +24,7 @@ Techniques for improving method structure and reducing complexity.
 **Solution:** Move fragment into separate method with descriptive name.
 
 **Benefits:**
+
 - Improved readability
 - Reduced duplication
 - Easier testing
@@ -36,17 +37,17 @@ func PrintOwing(invoice Invoice) {
     fmt.Println("***********************")
     fmt.Println("***** Invoice *****")
     fmt.Println("***********************")
-    
+
     // Print details
     fmt.Printf("Name: %s\n", invoice.Customer)
     fmt.Printf("Amount: %.2f\n", invoice.Amount)
-    
+
     // Calculate outstanding
     outstanding := 0.0
     for _, order := range invoice.Orders {
         outstanding += order.Amount
     }
-    
+
     fmt.Printf("Outstanding: %.2f\n", outstanding)
 }
 ```
@@ -86,6 +87,7 @@ func calculateOutstanding(invoice Invoice) float64 {
 ```
 
 **When to use:**
+
 - Method is too long (>20 lines)
 - Comments needed to explain code section
 - Code can be reused elsewhere
@@ -97,6 +99,7 @@ func calculateOutstanding(invoice Invoice) float64 {
 **Solution:** Replace method calls with method body.
 
 **Benefits:**
+
 - Removes unnecessary indirection
 - Simplifies code flow
 - Easier to understand
@@ -125,6 +128,7 @@ func GetRating(driver Driver) int {
 ```
 
 **When to use:**
+
 - Method does almost nothing
 - Method is only called once
 - Indirection adds no value
@@ -136,6 +140,7 @@ func GetRating(driver Driver) int {
 **Solution:** Extract expression into method, replace temp with method call.
 
 **Benefits:**
+
 - Can reuse calculation
 - Clearer intent
 - Encourages extraction of complex logic
@@ -145,7 +150,7 @@ func GetRating(driver Driver) int {
 ```go
 func CalculateTotal(order Order) float64 {
     basePrice := order.Quantity * order.ItemPrice
-    
+
     if basePrice > 1000 {
         return basePrice * 0.95
     }
@@ -169,6 +174,7 @@ func basePrice(order Order) float64 {
 ```
 
 **When to use:**
+
 - Temp used multiple times
 - Complex expression
 - Expression could be used elsewhere
@@ -180,6 +186,7 @@ func basePrice(order Order) float64 {
 **Solution:** Extract condition and branches into separate methods.
 
 **Benefits:**
+
 - Clarifies intent of condition
 - More readable
 - Easier to modify logic
@@ -231,6 +238,7 @@ Techniques for moving functionality between objects.
 **Solution:** Create new method in the class it uses most, delegate or remove old method.
 
 **Benefits:**
+
 - Better cohesion
 - Clearer responsibilities
 - Reduced coupling
@@ -297,6 +305,7 @@ func (t AccountType) overdraftFee(daysOverdrawn int) float64 {
 **Solution:** Create new class and move relevant fields and methods.
 
 **Benefits:**
+
 - Single Responsibility Principle
 - Easier to understand
 - Better testability
@@ -338,6 +347,7 @@ func (p Person) GetTelephoneNumber() string {
 ```
 
 **When to use:**
+
 - Class has subset of data used only in some methods
 - Subset of data that changes together
 - Class too large or complex
@@ -349,6 +359,7 @@ func (p Person) GetTelephoneNumber() string {
 **Solution:** Create method on server object that hides the delegate.
 
 **Benefits:**
+
 - Reduces coupling
 - Easier to change delegate
 - Simplifies client code
@@ -400,6 +411,7 @@ Techniques for improving data representation.
 **Solution:** Turn data item into object.
 
 **Benefits:**
+
 - Encapsulates related data
 - Type safety
 - Centralized validation
@@ -442,6 +454,7 @@ func (c Customer) Name() string {
 ```
 
 **When to use:**
+
 - Simple data item needs validation
 - Additional data logically grouped
 - Need to add behavior to data
@@ -453,6 +466,7 @@ func (c Customer) Name() string {
 **Solution:** Make field private, provide accessors.
 
 **Benefits:**
+
 - Control access
 - Can add validation
 - Can change implementation
@@ -496,6 +510,7 @@ func (p *Person) SetName(name string) error {
 **Solution:** Replace type code with class or enum.
 
 **Benefits:**
+
 - Type safety
 - Prevents invalid values
 - Can attach behavior
@@ -554,6 +569,7 @@ Techniques for making conditional logic clearer.
 **Solution:** Move each branch to overriding method in subclass/implementation.
 
 **Benefits:**
+
 - Open/Closed Principle
 - Easier to extend
 - Eliminates type checking
@@ -620,6 +636,7 @@ func (n Norwegian) GetSpeed() float64 {
 **Solution:** Combine into single expression and extract.
 
 **Benefits:**
+
 - Clearer intent
 - Easier to understand logic
 - Simpler to modify
@@ -666,6 +683,7 @@ func isNotEligibleForDisability(employee Employee) bool {
 **Solution:** Use guard clauses for special cases.
 
 **Benefits:**
+
 - Clearer normal flow
 - Less nesting
 - Easier to read
@@ -675,7 +693,7 @@ func isNotEligibleForDisability(employee Employee) bool {
 ```go
 func GetPayAmount(employee Employee) float64 {
     var result float64
-    
+
     if employee.IsSeparated {
         result = 0
     } else {
@@ -686,7 +704,7 @@ func GetPayAmount(employee Employee) float64 {
             result = employee.Salary
         }
     }
-    
+
     return result
 }
 ```
@@ -701,7 +719,7 @@ func GetPayAmount(employee Employee) float64 {
     if employee.IsRetired {
         return 0
     }
-    
+
     // Normal calculation
     return employee.Salary
 }
@@ -714,6 +732,7 @@ func GetPayAmount(employee Employee) float64 {
 **Solution:** Replace null with null object that provides default behavior.
 
 **Benefits:**
+
 - Eliminates null checks
 - Safer code
 - Clearer intent
@@ -790,6 +809,7 @@ Techniques for making interfaces cleaner.
 **Solution:** Rename the method.
 
 **Benefits:**
+
 - Self-documenting code
 - Clearer intent
 - Better readability
@@ -839,6 +859,7 @@ func GetContact(contactID string) Contact {
 **Solution:** Remove the parameter.
 
 **Benefits:**
+
 - Simpler interface
 - Fewer dependencies
 - Easier to call
@@ -867,6 +888,7 @@ func CreateOrder(customer Customer) Order {
 **Solution:** Replace parameters with object.
 
 **Benefits:**
+
 - Clearer intent
 - Shorter parameter lists
 - Can add behavior to object
@@ -899,6 +921,7 @@ func AmountOverdue(range DateRange, customer Customer) float64 { /* ... */ }
 **Solution:** Split into two methods - one query, one modifier.
 
 **Benefits:**
+
 - Clearer semantics
 - Easier to reason about
 - Can query without side effects
@@ -910,7 +933,7 @@ func (c *Cache) GetOrCreate(key string) Value {
     if val, ok := c.data[key]; ok {
         return val
     }
-    
+
     // Side effect: modifies cache
     val := createDefault()
     c.data[key] = val
@@ -952,6 +975,7 @@ Techniques for managing inheritance and abstraction.
 **Solution:** Move method to superclass.
 
 **Benefits:**
+
 - Eliminates duplication
 - Centralizes logic
 - Easier to maintain
@@ -1007,6 +1031,7 @@ type Salesman struct {
 **Solution:** Move method to those subclasses.
 
 **Benefits:**
+
 - Clearer class purpose
 - No irrelevant methods
 - Better interface segregation
@@ -1046,6 +1071,7 @@ func (s Salesman) GetQuota() int {
 **Solution:** Move subset to separate interface.
 
 **Benefits:**
+
 - Clearer dependencies
 - Better testability (can mock)
 - Interface segregation
@@ -1097,6 +1123,7 @@ func CalculatePay(ht HourTracker) float64 {
 **Solution:** Create field for superclass, delegate methods, remove inheritance.
 
 **Benefits:**
+
 - More flexible
 - Can change delegate at runtime
 - Clearer intent
@@ -1174,5 +1201,5 @@ After applying technique, verify:
 ## Resources
 
 - Refactoring: Improving the Design of Existing Code (Martin Fowler)
-- https://refactoring.guru/refactoring/techniques
+- <https://refactoring.guru/refactoring/techniques>
 - Clean Code (Robert C. Martin)

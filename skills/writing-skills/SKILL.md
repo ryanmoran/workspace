@@ -72,7 +72,7 @@ API docs, syntax guides, tool documentation (office docs)
 
 ## Directory Structure
 
-```
+```text
 skills/
   skill-name/
     SKILL.md              # Main reference (required)
@@ -252,7 +252,7 @@ search-conversations supports multiple modes and filters. Run --help for details
 When searching, dispatch subagent with template...
 [20 lines of repeated instructions]
 
-# ✅ GOOD: Reference other skill
+## ✅ GOOD: Reference other skill
 
 Always use subagents (50-100x context savings). REQUIRED: Use [other-skill-name] for workflow.
 ```
@@ -266,7 +266,7 @@ your human partner: "How did we handle authentication errors in React Router bef
 You: I'll search past conversations for React Router authentication patterns.
 [Dispatch subagent with search query: "React Router authentication error handling 401"]
 
-# ✅ GOOD: Minimal example (20 words)
+## ✅ GOOD: Minimal example (20 words)
 
 Partner: "How did we handle auth errors in React Router?"
 You: Searching...
@@ -379,7 +379,7 @@ You're good at porting - one great example is enough.
 
 ### Self-Contained Skill
 
-```
+```text
 defense-in-depth/
   SKILL.md    # Everything inline
 ```
@@ -388,7 +388,7 @@ When: All content fits, no heavy reference needed
 
 ### Skill with Reusable Tool
 
-```
+```text
 condition-based-waiting/
   SKILL.md    # Overview + patterns
   example.ts  # Working helpers to adapt
@@ -398,7 +398,7 @@ When: Tool is reusable code, not just narrative
 
 ### Skill with Heavy Reference
 
-```
+```text
 pptx/
   SKILL.md       # Overview + workflows
   pptxgenjs.md   # 600 lines API reference
@@ -410,7 +410,7 @@ When: Reference material too large for inline
 
 ## The Iron Law (Same as TDD)
 
-```
+```text
 NO SKILL WITHOUT A FAILING TEST FIRST
 ```
 
@@ -525,7 +525,7 @@ Write code before test? Delete it. Start over.
 - Don't look at it
 - Delete means delete
 
-````
+````text
 </Good>
 
 ### Address "Spirit vs Letter" Arguments
