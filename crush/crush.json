@@ -4,6 +4,10 @@
     "markdown": {
       "command": "rumdl",
       "args": ["server", "--stdio"]
+    },
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
     }
   },
   "options": {

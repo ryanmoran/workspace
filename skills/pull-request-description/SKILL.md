@@ -150,6 +150,8 @@ Listen for:
 Use this proven template structure:
 
 ```markdown
+# [Concise title summarizing the change]
+
 ## What
 
 [2-4 sentences explaining the changes clearly and concisely]
@@ -382,6 +384,8 @@ This skill is based on industry best practices from:
 **Generated Description:**
 
 ```markdown
+# Fix null pointer exception in user profile handler
+
 ## What
 
 Fix null pointer exception in user profile handler that occurred when user data was missing.
@@ -423,6 +427,8 @@ This is a defensive fix. Consider adding validation middleware for all handlers 
 **Generated Description:**
 
 ```markdown
+# Add dark mode theme support
+
 ## What
 
 Add dark mode theme support to the application with user preference persistence.
@@ -477,6 +483,8 @@ Currently covers main application pages. Dashboard charts (#102) will be styled 
 **Generated Description:**
 
 ```markdown
+# Refactor authentication service for better testability
+
 ## What
 
 Refactor authentication service to separate concerns and improve testability.
