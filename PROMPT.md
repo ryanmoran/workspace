@@ -6,18 +6,33 @@
 
 ## Objective
 
-Let's develop a skill for writing pull request descriptions.
+Let's make some modifications to the ./skills/pull-request-description skill.
 
-Spend some time researching the following:
+During Phase 2, some more questions to ask might be:
 
-- [Writing A Great Pull Request Description](https://www.hackerone.com/blog/writing-great-pull-request-description)
-- [Best practices for GitHub pull request descriptions](https://graphite.com/guides/github-pr-description-best-practices)
-- [Good Manners of a Pull Request & Some Best Practices](https://medium.com/deliveryherotechhub/good-manners-of-a-pull-request-some-best-practices-cb2de3c3aea1)
-- [Helping others review your changes](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/helping-others-review-your-changes)
-- [A Guide to Perfecting Pull Requests](https://dev.to/karaluton/a-guide-to-perfecting-pull-requests-2b66)
-- [Writing Tips for Improving Your Pull Requests](https://www.simplethread.com/writing-tips-for-improving-your-pull-requests/)
+- What part of the PR do you want reviewed?
+  - Are you unsure of some requirements?
+  - Do you want to establish a new pattern?
+  - Are you concerned about some performance or resiliency issue?
+  - etc.
+- What other work do I need to be aware of to situate myself in the PR?
+  - Is there more stuff coming later?
+  - Something in a different repo?
+  - etc.
 
-Then, let's brainstorm what we want out of a skill helps an agent walk the developer through this process.
+In Phase 3, urge the agent to:
+
+- Focus on brevity and clarity
+- Don't repeat yourself
+- Place the most important things near the top.
+
+In Phase 5:
+
+1. Assume that you will not be making the PR directly. You will be
+   providing the user with a PR_DESCRIPTION.md file that they can paste into the
+   PR they make themselves.
+2. Also generate a COMMIT_MSG.md file that contains a much shorter summary of
+   the PR description, focused on the "what".
 
 ## On Successful Completion of the Objective
 
