@@ -112,6 +112,21 @@ Listen for:
 - "I see some TODOs. Are there follow-up tasks or known limitations?"
 - "Should we create follow-up issues for these?"
 
+**For review focus areas**:
+
+- "What part of the PR do you want reviewers to focus on?"
+  - "Are you unsure about meeting some requirements?"
+  - "Are you trying to establish a new pattern or approach?"
+  - "Are you concerned about performance or resiliency?"
+  - "Is there a specific architectural decision you'd like feedback on?"
+
+**For situating the PR in broader context**:
+
+- "Is there other work I should mention to help reviewers understand this PR?"
+  - "Is there related work coming in future PRs?"
+  - "Is this connected to changes in other repositories?"
+  - "Does this depend on or enable other ongoing work?"
+
 #### What NOT to Ask
 
 - **Don't ask "What changed?"** - You can see the diff
@@ -119,6 +134,14 @@ Listen for:
 - **Don't ask obvious things** - If the diff shows a bug fix in error handling, don't ask "what's the main change"
 
 ### Phase 3: Generate Description
+
+**Writing Priorities:**
+
+1. **Focus on brevity and clarity** - Every word should earn its place
+2. **Don't repeat yourself** - If you said it once, don't say it again differently
+3. **Place the most important things near the top** - Reviewers scan from top to bottom
+4. **Be scannable** - Use bullets, headings, and short paragraphs
+5. **Cut the fluff** - Active voice, simple language, no filler words
 
 Use this proven template structure:
 
@@ -218,49 +241,45 @@ Relates to #[issue]
    - Re-present updated sections
    - Confirm when ready
 
-### Phase 5: Create the Pull Request
+### Phase 5: Deliver PR Artifacts
 
-1. **Verify branch is pushed**
+**You will NOT be creating the PR directly.** Instead, provide the user with files they can use:
 
-   ```bash
-   git status
-   # If not pushed:
-   git push -u origin <branch-name>
-   ```
+1. **Generate PR_DESCRIPTION.md**
 
-2. **Create PR using gh CLI**
+   Create a file containing the full PR description following the template above. This is what the user will paste into the PR body.
 
    ```bash
-   gh pr create --title "Title" --body "$(cat <<'EOF'
-   [Generated description here]
+   # Write the file
+   cat > PR_DESCRIPTION.md <<'EOF'
+   [Full PR description here]
    EOF
-   )"
    ```
 
-3. **Confirm success**
-   - Show PR URL
-   - Remind about self-review before requesting reviewers
-   - Suggest: "Review the PR on GitHub, add any inline comments to guide reviewers, then request reviews when ready"
+2. **Generate COMMIT_MSG.md**
+
+   Create a concise commit message file focused on the "what" (not the "why"). This should be:
+   - Much shorter than the PR description (2-4 sentences)
+   - Focused on what changed, not why
+   - Suitable for use as a commit message or PR title
+   - Written in imperative mood ("Add feature" not "Added feature")
+
+   ```bash
+   # Write the file
+   cat > COMMIT_MSG.md <<'EOF'
+   [Concise summary of changes]
+
+   [Optional 1-2 sentence detail of key changes]
+   EOF
+   ```
+
+3. **Present both files**
+   - Show the user both files were created
+   - Explain PR_DESCRIPTION.md is for the PR body
+   - Explain COMMIT_MSG.md is a shorter summary they can use for the PR title or when squashing commits
+   - Remind: "Copy PR_DESCRIPTION.md into your PR body when you create it"
 
 ## Special Cases
-
-### When User Says "Just Generate It"
-
-If the user wants minimal interaction:
-
-1. Do full analysis (git diff, commits, context)
-2. Generate best-effort description from available info
-3. Present for approval with: "I've generated a description based on the code changes. Review and let me know if anything needs adjustment."
-4. Create PR once approved
-
-### When PR Already Exists
-
-If PR is already created but description is poor:
-
-1. Fetch existing PR: `gh pr view <number> --json title,body`
-2. Analyze gaps (missing Why, no testing steps, etc.)
-3. Guide user through filling gaps
-4. Update PR: `gh pr edit <number> --body "$(cat <<'EOF' ... EOF)"`
 
 ### When Changes Are Too Large
 
@@ -275,7 +294,7 @@ If diff shows >500 lines or many unrelated files:
 If git status shows no commits on branch:
 
 1. Inform: "I don't see any commits on this branch yet."
-2. Ask: "Would you like to commit your changes first, or are you planning to make a draft PR?"
+2. Ask: "Would you like to commit your changes first, or should I generate a draft description for when you're ready?"
 
 ## Anti-Patterns to Avoid
 
