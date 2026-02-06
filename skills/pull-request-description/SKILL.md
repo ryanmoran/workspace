@@ -227,6 +227,8 @@ Relates to #[issue]
 
 ### Phase 4: Present and Refine
 
+**IMPORTANT: You MUST wait for user feedback in this phase before proceeding to Phase 5.**
+
 1. **Show the generated description**
    - Present the full markdown
    - Don't ask "does this look good?" - be specific
@@ -241,7 +243,11 @@ Relates to #[issue]
    - Re-present updated sections
    - Confirm when ready
 
+**CHECKPOINT: STOP HERE. Do not generate files yet. Wait for the user to approve the description before moving to Phase 5.**
+
 ### Phase 5: Deliver PR Artifacts
+
+**PREREQUISITE: Only proceed to this phase after the user has approved the description in Phase 4.**
 
 **You will NOT be creating the PR directly.** Instead, provide the user with files they can use:
 

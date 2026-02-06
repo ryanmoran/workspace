@@ -8,14 +8,12 @@
 
 Let's make some modifications to the ./skills/pull-request-description skill.
 
-When I ran the skill, the agent skipped over Phase 4 and just wrote the description out on disk.
-I want to add some extra instructions to prevent this from happening again.
+In Phase 2, if the user responds that no testing is required, you do not need to
+include the "How to Test" section in the generated output.
 
-1. In Phase 4, add explicit instructions that the agent must WAIT for user feedback before proceeding
-2. In Phase 5, add a clear prerequisite: "Only proceed to this phase after the user has approved the description in
-Phase 4"
-3. Consider adding a checkpoint reminder between phases: "STOP - Do not generate files yet. Present the description
-to the user first."
+The "Review Guidance" section should be reframed as "Things to Notice". Don't
+specify how to do the review, just highlight where the important changes are and
+where to focus.
 
 ## On Successful Completion of the Objective
 
