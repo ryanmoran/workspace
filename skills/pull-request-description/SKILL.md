@@ -77,6 +77,7 @@ Listen for:
 - "What steps should reviewers follow to verify these changes?"
 - "Are there specific scenarios or edge cases to test?"
 - "What should they see when it works correctly?"
+- "Does this require testing, or is it documentation/config only?"
 
 Listen for:
 
@@ -85,6 +86,9 @@ Listen for:
 - User flows to exercise
 - Expected results
 - Required setup (permissions, feature flags, env vars)
+- Indication that no testing is needed
+
+**Note**: If the user indicates no testing is required, omit the "How to Test" section from the generated description.
 
 #### Conditional Questions (Ask When Relevant)
 
@@ -163,6 +167,8 @@ Use this proven template structure:
 
 ## How to Test
 
+[Only include this section if testing is required]
+
 **Prerequisites:**
 - [Any setup needed: feature flags, permissions, env vars, data fixtures]
 
@@ -184,12 +190,20 @@ Use this proven template structure:
 Closes #[issue]
 Relates to #[issue]
 
+## Things to Notice
+
+[Optional section highlighting where important changes are and where to focus attention:]
+- [Key files or sections with significant changes]
+- [New patterns or architectural decisions introduced]
+- [Complex logic or algorithms that may need extra attention]
+- [Areas where you're seeking specific feedback]
+- [Dependencies between different parts of the change]
+
 ## Notes
 
 [Optional section for:]
 - [Known limitations or incomplete work]
 - [Follow-up tasks needed]
-- [Areas requiring careful review]
 - [Backwards compatibility notes]
 - [Performance implications]
 - [Security considerations]
@@ -500,19 +514,17 @@ The authentication logic was tightly coupled to HTTP handlers, making it difficu
 - Login/logout flows work identically to before
 - No behavior changes for end users
 
-## Review Guidance
+## Things to Notice
 
-Recommended review order:
-1. Start with `internal/auth/interfaces.go` - new service contracts
-2. Review `internal/auth/token_service.go` - extracted token logic
-3. Review `internal/auth/password_service.go` - extracted password logic
-4. Check `internal/auth/auth_service.go` - main orchestration
-5. Finally review handler updates in `internal/handlers/`
+Key changes are concentrated in:
+- `internal/auth/interfaces.go` - new service contracts defining the architecture
+- `internal/auth/token_service.go`, `password_service.go`, `auth_service.go` - extracted business logic
+- `internal/handlers/` - updated to use new service structure
 
-Pay special attention to:
-- Error handling in token generation
-- Password hash comparison edge cases
-- Thread safety of service instances
+Important areas:
+- Error handling in token generation has been consolidated
+- Password hash comparison now handles edge cases explicitly
+- Service instances are designed for thread-safe use
 
 ## Related Issues
 
