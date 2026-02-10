@@ -86,22 +86,58 @@ Agent: 1. Read and understand ticket requirements
 
 **Do NOT create separate testing issues.** Testing is part of implementing each layer, not a separate phase.
 
+**Do NOT create foundational setup issues.** Foundational work (installing dependencies, creating
+directories, setting up scaffolding) should be embedded into the issues that need that work. For example:
+
+- ❌ "ISSUE-001: Install Required Dependencies" - Don't create this
+- ❌ "ISSUE-002: Create Directory Structure" - Don't create this
+- ✅ "ISSUE-001: Database Migration" - Include installing migration tool if needed
+- ✅ "ISSUE-003: Datastore Layer" - Include creating directories as first step
+
+**Rationale:** Foundational work has no value in isolation. It only has value when used by actual
+implementation. Embedding it ensures dependencies are installed exactly when needed and reduces
+coordination overhead.
+
+**Common foundational work to embed:**
+
+- Installing dependencies (npm install, go get, pip install)
+- Creating directory structures
+- Generating boilerplate/scaffolding
+- Setting up configuration files
+- Installing development tools
+
+**How to embed foundational work:**
+
+Instead of creating separate issues for setup, include the setup steps in the "Technical Notes" or "Requirements" section of the issue that needs it:
+
+```markdown
+## Technical Notes
+
+- Install migration tool if not present: `go install github.com/example/migrate@latest`
+- Create directory: `internal/assets/datastore/`
+- Follow migration pattern from existing services in `internal/locations/datastore/migrations/`
+```
+
+This ensures the implementing agent has all context and can complete the work atomically.
+
 **Common issue structure pattern:**
 
 ```text
 Phase 1: Foundation
-├── Database migration
-└── API definitions (protobuf/contract)
+├── Database migration (includes installing migration tool if needed)
+└── API definitions (protobuf/contract, includes installing protobuf tools if needed)
 
 Phase 2: Implementation Layers
-├── Datastore layer (SQL queries + tests)
+├── Datastore layer (SQL queries + tests, includes creating directories)
 ├── Domain layer (business logic + tests)
 ├── Request handlers (validation/coordination + tests)
-└── Service layer (wiring + integration tests)
+└── Service layer (wiring + integration tests, includes dependency installation)
 
 Phase 3: Documentation
 └── Documentation updates
 ```
+
+**Note:** Foundational setup (dependencies, directories) is embedded into implementation issues, not separate.
 
 **CRITICAL: Tests are NOT separate issues.** Each implementation issue includes writing and verifying tests
 for that layer. The agent implementing a feature should write tests when writing the implementation code,
@@ -262,6 +298,7 @@ See existing example: `internal/locations/requests/create.go`
 - Request handlers live in `internal/*/requests/`
 - Use `dbx.Transactor` for transaction management
 - Follow existing patterns from Locations service
+- Create `internal/assets/requests/` directory if it doesn't exist
 ```
 
 **Let programmers discover the implementation approach by:**
@@ -271,6 +308,7 @@ See existing example: `internal/locations/requests/create.go`
 - Referencing similar existing code
 - Explaining patterns and conventions
 - Describing validation rules and business logic
+- Including foundational setup (dependencies, directories) as part of the issue
 
 ### Step 6: Ensure Testing Integration
 
@@ -370,6 +408,7 @@ This lints and formats the markdown files to ensure consistency.
 | Generic "implement X" without detail | Provide schemas, APIs, validation rules, context       |
 | Skipping rumdl formatting            | Always lint/format markdown files                      |
 | Separate testing issues              | Tests must be part of implementation issues, not separate |
+| Foundational setup issues            | Embed dependency installation and directory creation into implementation issues |
 
 ## Quick Reference
 

@@ -8,15 +8,8 @@
 
 Let's make some modifications to the ./skills/ticket-breakdown skill.
 
-The skill should discourage the agent from making issues that just layout
-foundational work.
-
-For instance, the agent should not create issues that just install dependencies
-or create directories.
-
-Instead, those concerns should be embedded into the issues that need that foundational
-work done. For instance, if an issue requires that a dependency be installed,
-then that issue should be the one to include its installation.
+Insert a step where the agent should be forced to present the set of issues it
+wants to write and ask for approval from the user.
 
 ## On Successful Completion of the Objective
 
