@@ -47,11 +47,13 @@ User: "Break down this ticket"
 Agent: 1. Read and understand ticket requirements
        2. Consult architecture docs
        3. Design issue structure with phases
-       4. Create issues/ directory structure
-       5. Write README.md with dependencies
-       6. Create individual ISSUE-*.md files
-       7. Focus on WHAT and WHY, not HOW
-       8. Lint/format with rumdl
+       4. Present proposed issues and ask for approval
+       5. Wait for user confirmation
+       6. Create issues/ directory structure
+       7. Write README.md with dependencies
+       8. Create individual ISSUE-*.md files
+       9. Focus on WHAT and WHY, not HOW
+       10. Lint/format with rumdl
 ```
 
 ## Breakdown Process
@@ -149,7 +151,50 @@ following test-driven development practices.
 - Dependencies should form a DAG (no cycles)
 - Document which issues can be done in parallel
 
-### Step 3: Create Directory Structure
+### Step 3: Present Proposed Issues for Approval
+
+**CRITICAL: Do not proceed to file creation without user approval.**
+
+After designing the issue structure, present your proposed breakdown to the user:
+
+**Present in this format:**
+
+```markdown
+## Proposed Issue Breakdown
+
+I've analyzed the ticket and propose the following issues:
+
+### Phase 1: [Phase Name]
+
+- **ISSUE-001**: [Title] - [One-line description]
+  - Depends on: Nothing
+- **ISSUE-002**: [Title] - [One-line description]
+  - Depends on: Nothing
+
+### Phase 2: [Phase Name]
+
+- **ISSUE-003**: [Title] - [One-line description]
+  - Depends on: ISSUE-001
+- **ISSUE-004**: [Title] - [One-line description]
+  - Depends on: ISSUE-002, ISSUE-003
+
+[Continue for all phases...]
+
+**Total issues**: X
+
+May I proceed with creating these issue files?
+```
+
+**Wait for user approval** before continuing. The user may:
+
+- Approve as-is
+- Request modifications to the structure
+- Ask questions about the breakdown
+- Suggest different groupings or dependencies
+
+**Only after receiving approval** should you proceed to Step 4.
+
+### Step 4: Create Directory Structure
 
 **Required files:**
 
@@ -168,7 +213,7 @@ The `issue-management` skill expects to create and own the `.status.json` file. 
 will cause conflicts. The issue-management skill will initialize it when an agent first works on an
 issue.
 
-### Step 4: Write README.md
+### Step 5: Write README.md
 
 **README.md structure:**
 
@@ -222,7 +267,7 @@ issue.
 - Group related issues into phases
 - Link to each issue file
 
-### Step 5: Write Individual Issue Files
+### Step 6: Write Individual Issue Files
 
 **Each ISSUE-*.md structure:**
 
@@ -310,7 +355,7 @@ See existing example: `internal/locations/requests/create.go`
 - Describing validation rules and business logic
 - Including foundational setup (dependencies, directories) as part of the issue
 
-### Step 6: Ensure Testing Integration
+### Step 7: Ensure Testing Integration
 
 **CRITICAL: Every implementation issue must include testing.**
 
@@ -340,7 +385,7 @@ When writing issue files, ensure acceptance criteria explicitly require tests:
 development. Separating testing into its own issue creates technical debt and encourages writing tests
 after the fact, which is less effective.
 
-### Step 7: Format with rumdl
+### Step 8: Format with rumdl
 
 **After creating all markdown files:**
 
@@ -399,6 +444,7 @@ This lints and formats the markdown files to ensure consistency.
 
 | Mistake                              | Fix                                                    |
 | ------------------------------------ | ------------------------------------------------------ |
+| Creating files without user approval | Present proposed breakdown and wait for confirmation   |
 | Creating .status.json yourself       | Don't create it - issue-management skill owns this     |
 | Too prescriptive about code          | Focus on requirements, context, and what to reference  |
 | No clear dependencies                | Explicitly state dependencies in README.md             |
@@ -416,6 +462,10 @@ This lints and formats the markdown files to ensure consistency.
 Read ticket + architecture docs
   ↓
 Design phases and dependencies
+  ↓
+Present proposed issues to user
+  ↓
+Wait for user approval
   ↓
 Create issues/ directory
   ↓
