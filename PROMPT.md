@@ -6,9 +6,10 @@
 
 ## Objective
 
-Let's make some modifications to the ./skills/pull-request-description skill.
+Let's add some more context to the existing refactoring skill.
 
-Tell the agent that instead of writing the commit message to a file, it should use it as the commit message when committing and pushing the code.
+Review the contents of <https://go.dev/gopls/features/transformation> and then
+add a new section on using `gopls` to refactor Go code.
 
 ## On Successful Completion of the Objective
 

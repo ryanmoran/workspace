@@ -265,7 +265,7 @@ Relates to #[issue]
 
 **PREREQUISITE: Only proceed to this phase after the user has approved the description in Phase 4.**
 
-**You will NOT be creating the PR directly.** Instead, provide the user with files they can use:
+**You will NOT be creating the PR directly.** Instead, generate the PR description and commit the code:
 
 1. **Generate PR_DESCRIPTION.md**
 
@@ -278,28 +278,30 @@ Relates to #[issue]
    EOF
    ```
 
-2. **Generate COMMIT_MSG.md**
+2. **Commit and push with generated commit message**
 
-   Create a concise commit message file focused on the "what" (not the "why"). This should be:
+   Create a concise commit message focused on the "what" (not the "why"). This should be:
    - Much shorter than the PR description (2-4 sentences)
    - Focused on what changed, not why
    - Suitable for use as a commit message or PR title
    - Written in imperative mood ("Add feature" not "Added feature")
 
+   Use this commit message when committing and pushing the code:
+
    ```bash
-   # Write the file
-   cat > COMMIT_MSG.md <<'EOF'
+   git commit -m "$(cat <<'EOF'
    [Concise summary of changes]
 
    [Optional 1-2 sentence detail of key changes]
    EOF
+   )"
+   git push
    ```
 
-3. **Present both files**
-   - Show the user both files were created
-   - Explain PR_DESCRIPTION.md is for the PR body
-   - Explain COMMIT_MSG.md is a shorter summary they can use for the PR title or when squashing commits
-   - Remind: "Copy PR_DESCRIPTION.md into your PR body when you create it"
+3. **Present completion**
+   - Confirm the code has been committed and pushed
+   - Show the user that PR_DESCRIPTION.md was created
+   - Remind: "Copy PR_DESCRIPTION.md into your PR body when you create the PR"
 
 ## Special Cases
 
