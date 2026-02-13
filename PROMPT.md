@@ -6,10 +6,9 @@
 
 ## Objective
 
-Let's make some modifications to the ./skills/ticket-breakdown skill.
+Let's make some modifications to the ./skills/pull-request-description skill.
 
-Insert a step where the agent should be forced to present the set of issues it
-wants to write and ask for approval from the user.
+Tell the agent that instead of writing the commit message to a file, it should use it as the commit message when committing and pushing the code.
 
 ## On Successful Completion of the Objective
 
