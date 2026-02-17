@@ -458,7 +458,122 @@ Choose the appropriate technique for each smell:
    manager := employee.GetManager()
    ```
 
-#### 3.3 Special Techniques
+#### 3.3 Using gopls for Go Refactoring
+
+The Go language server (`gopls`) provides automated refactoring capabilities that can safely transform code. These tools are available through editors that support LSP (Language Server Protocol).
+
+**Advantages of gopls refactorings:**
+
+- **Safety:** Updates all references across the codebase
+- **Accuracy:** Handles edge cases you might miss manually
+- **Speed:** Instant transformations across multiple files
+
+**Key gopls refactoring capabilities:**
+
+**Extraction Operations (`refactor.extract`):**
+
+1. **Extract Function/Method** (`refactor.extract.function`, `refactor.extract.method`)
+   - Select statements within a function
+   - Gopls creates a new function/method with appropriate parameters and return values
+   - Replaces selection with function call
+   - Use for: Breaking up long methods, isolating logic for testing
+
+2. **Extract Variable/Constant** (`refactor.extract.variable`, `refactor.extract.constant`)
+   - Select an expression
+   - Gopls creates a new variable/constant initialized with that expression
+   - Replaces expression with variable reference
+   - Use for: Naming complex expressions, avoiding duplication
+
+3. **Extract Variable (All Occurrences)** (`refactor.extract.variable-all`)
+   - Replaces ALL occurrences of an expression with a single variable
+   - Use for: Eliminating duplicate calculations, improving DRY
+
+4. **Extract to New File** (`refactor.extract.toNewFile`)
+   - Select top-level declarations (types, functions, constants)
+   - Gopls moves them to a new file with necessary imports
+   - Use for: Splitting large files, organizing by responsibility
+
+**Inlining Operations (`refactor.inline`):**
+
+1. **Inline Function Call** (`refactor.inline.call`)
+   - Replaces function call with the function's body
+   - Preserves behavior (handles side effects, parameter substitution)
+   - Use for: Removing unnecessary abstractions, simplifying single-use functions
+
+2. **Inline Variable** (`refactor.inline.variable`)
+   - Replaces variable reference with its initializer expression
+   - Use for: Removing unnecessary intermediate variables
+
+**Code Rewriting (`refactor.rewrite`):**
+
+1. **Remove Unused Parameter** (`refactor.rewrite.removeUnusedParam`)
+   - Removes unused function parameters
+   - Updates all callers automatically
+   - Preserves side effects in argument expressions
+   - Use for: Cleaning up function signatures
+
+2. **Move Parameters** (`refactor.rewrite.moveParamLeft`, `refactor.rewrite.moveParamRight`)
+   - Reorders function parameters
+   - Updates all call sites
+   - Use for: Grouping related parameters, following conventions
+
+3. **Fill Struct Literal** (`refactor.rewrite.fillStruct`)
+   - Populates missing struct fields
+   - Uses heuristics for field values (matches names, falls back to zero values)
+   - Use for: Discovering available fields, ensuring initialization
+
+4. **Fill Switch** (`refactor.rewrite.fillSwitch`)
+   - Adds missing cases for enum types or type switches
+   - Use for: Exhaustive case handling
+
+5. **Change Quote Style** (`refactor.rewrite.changeQuote`)
+   - Converts between raw (`` ` ``) and interpreted (`"`) string literals
+   - Use for: Avoiding escape sequences, multiline strings
+
+6. **Invert If Condition** (`refactor.rewrite.invertIf`)
+   - Negates condition and swaps if/else blocks
+   - Use for: Reducing nesting, early returns
+
+7. **Split/Join Lines** (`refactor.rewrite.splitLines`, `refactor.rewrite.joinLines`)
+   - Formats composite literals, function calls, signatures, and results
+   - Use for: Readability, following style guidelines
+
+8. **Add/Remove Struct Tags** (`refactor.rewrite.addTags`, `refactor.rewrite.removeTags`)
+   - Manages JSON struct tags on fields
+   - Use for: API serialization, configuration structs
+
+9. **Eliminate Dot Import** (`refactor.rewrite.eliminateDotImport`)
+   - Removes dot imports and qualifies all package uses
+   - Use for: Improving code clarity, avoiding name collisions
+
+**When to use gopls refactorings in the refactoring workflow:**
+
+- **Phase 2 (Safety Net):** Use Extract Function to create test islands from untestable code
+- **Phase 3 (Execution):** Use gopls for mechanical transformations (extract, inline, rename)
+- **After manual extraction:** Use Fill Struct to discover what parameters should be in parameter objects
+- **Code cleanup:** Use Remove Unused Parameter after refactoring reduces dependencies
+
+**Limitations to be aware of:**
+
+- Some transformations may lose comments (verify and restore if needed)
+- Generated files are excluded (won't transform `*.pb.go` or similar)
+- Complex extractions might need manual adjustment after gopls creates initial version
+- Always run tests after gopls refactorings (they're safe but not infallible)
+
+**Integration with the Atomic Refactoring Loop:**
+
+```text
+1. Pick ONE refactoring (e.g., "Extract validation logic")
+2. Use gopls to extract function (automated, safe)
+3. Run tests immediately
+4. If tests pass: Commit
+5. If tests fail: Review gopls output, adjust if needed, or rollback
+6. Repeat
+```
+
+Gopls refactorings accelerate the loop by automating mechanical transformations, letting you focus on design decisions rather than manual code editing.
+
+#### 3.4 Special Techniques
 
 **For truly untestable code (Emergency Rescue Pattern):**
 
@@ -477,7 +592,7 @@ See Phase 2.1 Strategy 4 - write the function you wish existed, test it, replace
 3. **Apply Extract Class** for that responsibility only
 4. **Repeat** in future sessions for other responsibilities
 
-#### 3.4 Commit Strategy
+#### 3.5 Commit Strategy
 
 Commit after every successful refactoring:
 
