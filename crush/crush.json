@@ -1,10 +1,6 @@
 {
   "$schema": "https://charm.land/crush.json",
   "lsp": {
-    "markdown": {
-      "command": "rumdl",
-      "args": ["server", "--stdio"]
-    },
     "typescript": {
       "command": "typescript-language-server",
       "args": ["--stdio"]
