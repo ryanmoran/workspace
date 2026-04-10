@@ -10,6 +10,7 @@
     "attribution": {
       "trailer_style": "none",
       "generated_with": false
-    }
+    },
+    "skills_paths": ["/skills", "./skills"]
   }
 }

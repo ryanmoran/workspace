@@ -45,6 +45,9 @@ map("n", "<leader>y", '"*y', { noremap = true })
 -- Toggle go inlay hints
 map("n", "<leader>i", ":GoToggleInlay<CR>", { noremap = true })
 
+-- Copy current buffer path to clipboard
+map("n", "<leader>cr", ":let @+=expand('%')<CR>", { noremap = true })
+
 -- Maintain undo history between sessions
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("config") .. "/undo"

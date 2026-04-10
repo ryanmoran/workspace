@@ -19,6 +19,7 @@ return {
 	config = function()
 		local luasnip = require("luasnip")
 		local types = require("luasnip.util.types")
+		require("luasnip.loaders.from_lua").lazy_load({ paths = { "~/.config/nvim/luasnippets" } })
 
 		-- Display virtual text to indicate snippet has more nodes
 		luasnip.config.setup({
