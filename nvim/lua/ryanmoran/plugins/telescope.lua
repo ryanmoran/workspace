@@ -10,7 +10,6 @@ return {
 		{ "nvim-telescope/telescope-file-browser.nvim", enabled = true },
 		{ "nvim-telescope/telescope-live-grep-args.nvim", enabled = true },
 	},
-	branch = "0.1.x",
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")

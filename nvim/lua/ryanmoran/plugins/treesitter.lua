@@ -3,58 +3,60 @@ return {
 	branch = "main",
 	build = ":TSUpdate",
 	dependencies = {
-		{ "nvim-treesitter/nvim-treesitter-textobjects" }, -- Syntax aware text-objects
+		{ "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" }, -- Syntax aware text-objects
 		{
 			"nvim-treesitter/nvim-treesitter-context", -- Show code context
 			opts = { enable = true, mode = "topline", line_numbers = true },
 		},
 	},
 	config = function()
+		require("nvim-treesitter").install({
+			"bash",
+			"c",
+			"cpp",
+			"css",
+			"csv",
+			"dot",
+			"gitignore",
+			"go",
+			"gomod",
+			"gosum",
+			"gowork",
+			"html",
+			"javascript",
+			"json",
+			"lua",
+			"make",
+			"markdown",
+			"proto",
+			"python",
+			"rust",
+			"sql",
+			"toml",
+			"tsx",
+			"typescript",
+			"yaml",
+		})
+
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "*",
+			callback = function()
+				if vim.bo.filetype == "csv" then -- preferring chrisbra/csv.vim
+					return
+				end
+				local ok = pcall(vim.treesitter.start)
+				if ok then
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end,
+		})
+
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = { "markdown" },
 			callback = function(_)
 				-- treesitter-context is buggy with Markdown files
 				require("treesitter-context").disable()
 			end,
-		})
-
-		local treesitter = require("nvim-treesitter.configs")
-		treesitter.setup({
-			ensure_installed = {
-				"bash",
-				"c",
-				"cpp",
-				"css",
-				"csv",
-				"dot",
-				"gitignore",
-				"go",
-				"gomod",
-				"gosum",
-				"gowork",
-				"html",
-				"javascript",
-				"json",
-				"lua",
-				"make",
-				"markdown",
-				"proto",
-				"python",
-				"rust",
-				"sql",
-				"toml",
-				"tsx",
-				"typescript",
-				"yaml",
-			},
-			indent = { enable = true },
-			auto_install = true,
-			sync_install = false,
-			highlight = {
-				enable = true,
-				disable = { "csv" }, -- preferring chrisbra/csv.vim
-			},
-			textobjects = { select = { enable = true, lookahead = true } },
 		})
 
 		local opts = { noremap = true, silent = true }
