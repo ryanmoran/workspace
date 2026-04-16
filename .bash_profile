@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set +o posix
+
 function main() {
   function setup_aliases() {
     alias vim="nvim"
