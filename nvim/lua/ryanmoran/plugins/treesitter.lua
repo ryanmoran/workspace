@@ -16,6 +16,7 @@ return {
 			"cpp",
 			"css",
 			"csv",
+			"cue",
 			"dot",
 			"gitignore",
 			"go",

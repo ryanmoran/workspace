@@ -26,6 +26,7 @@ return {
 
 		installer.setup({
 			ensure_installed = {
+				"cuelsp",
 				"eslint_d",
 				"goimports",
 				"golangci-lint",
@@ -42,6 +43,7 @@ return {
 				"tailwindcss-language-server",
 				"yamlfmt",
 				"yamllint",
+				"yaml-language-server",
 			},
 		})
 	end,

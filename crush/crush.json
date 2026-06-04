@@ -12,5 +12,27 @@
       "generated_with": false
     },
     "skills_paths": ["/skills", "./skills"]
+  },
+  "mcp": {
+    "github": {
+      "disabled": true,
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "timeout": 120,
+      "disabled_tools": ["create_issue", "create_pull_request"],
+      "headers": {
+        "Authorization": "Bearer $GITHUB_AGENT_PAT"
+      }
+    },
+    "playwright": {
+      "disabled": true,
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--caps=devtools,testing,network"
+      ]
+    }
   }
 }
